@@ -25,7 +25,7 @@ const verfiy=(email,token)=>{
         to:email,
         subject:"Delivery Verification",
         text:"Click the below link for verification",
-        html:'<a href="http://localhost:3002/authentication/verification/'+token+'">'+token+'</a>'
+        html:'<a href="https://floating-brushlands-52313.herokuapp.com/authentication/verification/'+token+'">'+token+'</a>'
     }
 
     transporter.sendMail(mailoption,(err,res)=>{
@@ -45,7 +45,7 @@ const resetpass=(email,token)=>{
         to:email,
         subject:"Deliver Reset password",
         text:"Click the link for restting password",
-        html:'<a href="http://localhost:3002/authentication/reseting/'+token+'">'+token+'</a>'
+        html:'<a href="https://floating-brushlands-52313.herokuapp.com/authentication/reseting/'+token+'">'+token+'</a>'
     }
 
     transporter.sendMail(mailoption,(err,res)=>{
