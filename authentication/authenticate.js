@@ -116,11 +116,10 @@ router.post('/register',(req,res)=>{
 
 //verifying when user clicks on link on gmail
 router.get('/verification/:token',(req,res)=>{
-    console.log("yes");
+        console.log("yes");
         const authdata=token.decodeToken(req.params.token);
-        console.log(authdata);
-        if(err){
-            res.status(401).json({error:"You are not authorised to this link"});
+        if(!authdata){
+            res.status(401).json("Not authorised to acces this link");
         }
          perma.findOne({Email:authdata.user}).then(user=>{
             if(user)
