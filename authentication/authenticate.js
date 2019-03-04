@@ -1,3 +1,4 @@
+//module imports
 const express=require('express');
 const router=express.Router();
 const jwt=require('jsonwebtoken');
@@ -6,6 +7,9 @@ const {local_link}=require('../urls/links');
 const nodemailer=require('nodemailer');
 const ejs=require('ejs');
 
+
+//developer made function import
+const token=require('../jwt/jwt');
 
 const transporter= nodemailer.createTransport({
     service:"gmail",
@@ -148,9 +152,9 @@ router.post('/login',(req,res)=>{
         if(req.body.Password === user.Password)
             {
                 perma.findById({_id:user.id},{Password:false}).then(user=>{
-                    req.session.user=user;
-                    console.log(req.session);
-                    res.status(200).json(user);
+                    req.session.user=user._id;
+                    var enct=token.generateToken(user._id);
+                    res.status(200).json(enct);
                 })
             }
         else

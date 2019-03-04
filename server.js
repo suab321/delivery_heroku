@@ -10,6 +10,8 @@ const cookieparser=require('cookie-parser');
 
 //importing from developer made folder
 const {auth_route}=require('./authentication/authenticate');
+const {order_route}=require('./placing_order/order');
+
 
 //mongoose connection
 mongoose.connect(mongourl,{useNewUrlParser:true},(err,db)=>{
@@ -35,6 +37,7 @@ app.use(cookieparser());
 
 
 app.use('/authentication',auth_route);
+app.use('/order',order_route);
 
 app.listen(process.env.PORT || 3002);
 

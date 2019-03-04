@@ -10,6 +10,20 @@ mongoose.connect(mongourl,{useNewUrlParser:true},(err,db)=>{
         console.log("db.js 11"+err);
 })
 
+const Order_Schema=new mongoose.Schema({
+    User_id:String,
+    Commodity:String,
+    Receving_Address:String,
+    Delivery_Address:String,
+    Giver_Phone:String,
+    Giver_Name:String,
+    Giver_Phone:String,
+    Recevier_Phone:String,
+    Recevier_Name:String,
+    Price:String,
+    Date:String
+})
+
 const temp_schema=new mongoose.Schema({
     device_id:String,
     Name:String,
@@ -19,7 +33,10 @@ const temp_schema=new mongoose.Schema({
     IMEI:{type:String},
     Flag:{type:Number,default:0},
     Date:{type:Date},
-    response:{type:String}
+    response:{type:String},
+    My_Address:[{Place_Type:String,Value:[{value:String}]}],
+    Delivery_Address:[{Value:String}],
+    History:[{Order_id:String}]
 })
 const perma_schema=new mongoose.Schema({
     device_id:String,
@@ -35,10 +52,11 @@ const perma_schema=new mongoose.Schema({
 
 const temp_model=mongoose.model('temp',temp_schema);
 const perma_model=mongoose.model('perma',perma_schema);
-
+const order_model=mongoose.model('order',Order_Schema);
 
 module.exports={
     temp:temp_model,
     perma:perma_model,
+    order:order_model,
     mongourl
 }
