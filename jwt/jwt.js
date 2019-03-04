@@ -6,9 +6,15 @@ module.exports={
     decodeToken
 }
 
+
+
 function generateToken(data){
-    console.log(data);
-    return (jwt.sign({user:data},"suab"));
+    try{
+  const token=jwt.sign({user:data},"suab");
+    return token;
+    }catch{
+        return 0;
+    }
 }
 
 function decodeToken(token){

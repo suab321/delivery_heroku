@@ -4,7 +4,7 @@ const mongoose=require('mongoose');
 
 
 
-const mongourl="mongodb://suab:Suab123@cluster0-shard-00-00-vvcr0.mongodb.net:27017,cluster0-shard-00-01-vvcr0.mongodb.net:27017,cluster0-shard-00-02-vvcr0.mongodb.net:27017/delivery_user?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true"
+const mongourl="mongodb://suab:Suab123@cluster0-shard-00-00-ynffd.mongodb.net:27017,cluster0-shard-00-01-ynffd.mongodb.net:27017,cluster0-shard-00-02-ynffd.mongodb.net:27017/delivery_user?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true"
 mongoose.connect(mongourl,{useNewUrlParser:true},(err,db)=>{
     if(err)
         console.log("db.js 11"+err);
@@ -15,7 +15,6 @@ const Order_Schema=new mongoose.Schema({
     Commodity:String,
     Receving_Address:String,
     Delivery_Address:String,
-    Giver_Phone:String,
     Giver_Name:String,
     Giver_Phone:String,
     Recevier_Phone:String,

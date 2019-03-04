@@ -81,10 +81,9 @@ router.post('/register',(req,res)=>{
         db.response="0"
         db.save().then(user=>{
             if(user){
-                jwt.sign({user:user.Email},"suab",(err,token)=>{
-                    verfiy(user.Email,token);
+                    const enc=token.generateToken(user.Email);
+                    verfiy(user.Email,enc);
                     res.status(200).json({response:"0"});
-                })
             }
         }).catch(err=>{
         res.status(200).json({response:"1"});  
@@ -117,11 +116,13 @@ router.post('/register',(req,res)=>{
 
 //verifying when user clicks on link on gmail
 router.get('/verification/:token',(req,res)=>{
-    jwt.verify(req.params.token,"suab",(err,authdata)=>{
+    console.log("yes");
+        const authdata=token.decodeToken(req.params.token);
+        console.log(authdata);
         if(err){
             res.status(401).json({error:"You are not authorised to this link"});
         }
-         perma.findOne({Email:req.params.email}).then(user=>{
+         perma.findOne({Email:authdata.user}).then(user=>{
             if(user)
                 res.status(200).json({response:"1"})
             else{
@@ -143,7 +144,6 @@ router.get('/verification/:token',(req,res)=>{
                 })
             }
         }).catch(err=>{res.status(200).json({response:"2"})})
-    })
 })
 
 //logging in user
@@ -153,8 +153,8 @@ router.post('/login',(req,res)=>{
             {
                 perma.findById({_id:user.id},{Password:false}).then(user=>{
                     req.session.user=user._id;
-                    var enct=token.generateToken(user._id);
-                    res.status(200).json(enct);
+                    const enct=token.generateToken(user._id);
+                   res.status(200).json(enct);
                 })
             }
         else
