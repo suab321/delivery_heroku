@@ -45,10 +45,10 @@ router.post('/place_order',verify,(req,res)=>{
                 perma.findByIdAndUpdate({_id:user.User_id},{$addtoSet:{'History':{"Order_id":user._id}}}).then(user=>{
                     console.log(user);
                 }).catch(err=>{
-                    res.status(400).json("Order was not saved");
+                    res.status(400).json("Order was not saved while saving in perma");
                 })
             }).catch(err=>{
-                res.status(400).json("Order was not saved");
+                res.status(400).json("Order was not saved while saving order scehma");
             })
     }
     else

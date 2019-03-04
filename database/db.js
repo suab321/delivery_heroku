@@ -33,9 +33,6 @@ const temp_schema=new mongoose.Schema({
     Flag:{type:Number,default:0},
     Date:{type:Date},
     response:{type:String},
-    My_Address:[{Place_Type:String,Value:[{value:String}]}],
-    Delivery_Address:[{Value:String}],
-    History:[{Order_id:String}]
 })
 const perma_schema=new mongoose.Schema({
     device_id:String,
@@ -46,7 +43,10 @@ const perma_schema=new mongoose.Schema({
     IMEI:{type:String},
     Flag:{type:Number,default:0},
     Date:{type:Date},
-    response:{type:String}
+    response:{type:String},
+    My_Address:[{Place_Type:String,Value:[{value:String}]}],
+    Delivery_Address:[{Value:String}],
+    History:[{Order_id:String}]
 })
 
 const temp_model=mongoose.model('temp',temp_schema);
