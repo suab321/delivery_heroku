@@ -8,7 +8,7 @@
     </body>
     <script>
        var socket1=io.connect('https://floating-brushlands-52313.herokuapp.com');
-       var socket2=io.connect('http://localhost:3003');
+       var socket2=io.connect('https://fast-reef-53121.herokuapp.com');
        var button=document.getElementById('generator');
        button.addEventListener('click',function(){
           socket1.emit("request",{msg:"A new request is generated"});
