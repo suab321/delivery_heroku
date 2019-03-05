@@ -17,7 +17,7 @@ function connection(port){
         connected_socket.on("request_accepted_bydriver",(data)=>{
             console.log(data);
             perma.findOneAndUpdate({_id:data.User_id},{$pull:{'temp_History':{'Order_id':data._id}}}).then(user=>{
-                perma.findByIdAndUpdate({_id:data.User_id},{$adToSet:{'perma_Histroy':{'Order_id':data._id}}})
+                perma.findByIdAndUpdate({_id:data.User_id},{$adToSet:{'perma_Histroy':{'Order_id':data._id}}}).then(user=>{
                 temp_order.findByIdAndDelete({_id:data._id}).then(user=>{
                     const db=new perma_order
                     db.User_id=user.User_id;
@@ -36,6 +36,7 @@ function connection(port){
                     }).catch(err=>{console.log(err)});
                 }).catch(err=>{console.log(err)});
             })
+        })
         });
     })
 }
