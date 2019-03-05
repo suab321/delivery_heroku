@@ -17,9 +17,9 @@ function connection(port){
         connected_socket.on("request_accepted_bydriver",(data)=>{
             console.log(data);
             perma.update({_id:data.User_id,'History.Order_id':data._id},
-            {$set:{'History.$.isAccepted':1}},(err,user)=>{
-                if(user){
-
+            {$set:{'History.$.isAccepted':1}},(err,result)=>{
+                if(result){
+                    console.log(result);
                     temp_order.findByIdAndDelete({_id:data._id}).then(user=>{
                     const db=new perma_order
                     db.User_id=user.User_id;
