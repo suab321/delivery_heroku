@@ -44,9 +44,9 @@ router.post('/place_order',verify,(req,res)=>{
             db.Date=new Date();
             db.save().then(user=>{
                 console.log(user);
-                perma.findByIdAndUpdate({_id:userId},{$addToSet:{'temp_History':{"Order_id":user._id}}},{new:true}).then(res1=>{
-                    console.log(res1);
-                    sockets.emit_order(res1);
+                perma.findByIdAndUpdate({_id:userId},{$addToSet:{'temp_History':{"Order_id":user._id}}},{new:true}).then(user=>{
+                    console.log(user);
+                    sockets.emit_order(user);
                     res.status(200).json({response:"1"});
                 }).catch(err=>{
                     res.status(400).json("48"+err);
