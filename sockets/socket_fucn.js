@@ -10,13 +10,13 @@ function connection(port){
         console.log("made a connection");
         connected_socket.on("request",(req)=>{
             console.log(req)
-            io.sockets.emit("request_from_user",req);
+            io.sockets.emit("new_delivery_request",req);
         });
         connected_socket.on("request_accepted_driver",(data)=>console.log(data));
     })
 }
 function emit_order(data){
-    connected_socket.emit('new_delivery_request',(data));
+    io.sockets.emit('new_delivery_request',(data));
 }
 
 module.exports={
