@@ -16,7 +16,7 @@ function connection(port){
         });
         connected_socket.on("request_accepted_bydriver",(data)=>{
             perma.findOneAndUpdate({_id:data.User_id},{$addToSet:{'perma_History':{'Order_id':data._id}}}).then(user=>{
-                temp_order.findByIdAndDelete({_id:data._id}).then(user=>{
+                temp_order.findByIdAndDelete({_id:user._id}).then(user=>{
                     const db=new perma_order
                     db.User_id=user.User_id;
                     db.Commodity=user.Commodity;
