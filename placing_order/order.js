@@ -4,6 +4,7 @@ const jwt=require('jsonwebtoken');
 //developer made modules import
 const token=require('../jwt/jwt');
 const {temp_order,perma}=require('../database/db');
+const sockets=require('../sockets/socket_fucn');
 
 
 router.use(function check(req,res,next){
@@ -38,12 +39,12 @@ router.post('/place_order',verify,(req,res)=>{
             db.Giver_Phone=req.body.Giver_Phone;
             db.Recevier_Phone=req.body.Recevier_Phone;
             db.Recevier_Name=req.body.Recevier_Name;
-            db.Recevier_Email=req.body.Recevier_Name;
+            db.Recevier_Email=req.body.Recevier_Email;
             db.Price=req.body.Price,
             db.Date=new Date();
-
             db.save().then(user=>{
-                perma.findByIdAndUpdate({_id:userId},{$addToSet:{'History':{"Order_id":user._id}}}).then(user=>{
+                perma.findByIdAndUpdate({_id:userId},{$addToSet:{'temp_History':{"Order_id":user._id}}}).then(user=>{
+                    sockets.emit_order(user);
                     res.status(200).json({response:"1"});
                 }).catch(err=>{
                     res.status(400).json("48"+err);
