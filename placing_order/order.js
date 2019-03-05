@@ -38,6 +38,7 @@ router.post('/place_order',verify,(req,res)=>{
             db.Giver_Phone=req.body.Giver_Phone;
             db.Recevier_Phone=req.body.Recevier_Phone;
             db.Recevier_Name=req.body.Recevier_Name;
+            db.Recevier_Email=req.body.Recevier_Name;
             db.Price=req.body.Price,
             db.Date=new Date();
 
