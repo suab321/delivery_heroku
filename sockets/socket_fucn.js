@@ -16,7 +16,7 @@ function connection(port){
         });
         connected_socket.on("request_accepted_bydriver",(data)=>{
             console.log(data);
-            perma.findOneAndUpdate({_id:data.User_id},{$addToSet:{'perma_History':{'Order_id':data._id}}}).then(user=>{
+            perma.findOneAndUpdate({_id:data.User_id},{$pull:{'temp_History':{'Order_id':data._id}}},{$addToSet:{'perma_History':{'Order_id':data._id}}}).then(user=>{
                 temp_order.findByIdAndDelete({_id:data._id}).then(user=>{
                     const db=new perma_order
                     db.User_id=user.User_id;
@@ -28,7 +28,7 @@ function connection(port){
                     db.Recevier_Phone=user.Recevier_Phone;
                     db.Recevier_Name=user.Recevier_Name;
                     db.Recevier_Email=user.Recevier_Email;
-                    db.Price=req.body.Price,
+                    db.Price=user.Price,
                     db.Date=new Date();
                     db.save().then(user=>{
                         console.log("33 socket_fucn.js"+user);
