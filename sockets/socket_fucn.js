@@ -11,7 +11,7 @@ function connection(port){
         connected_socket=socket;
         console.log("made a connection");
         connected_socket.on("request",(req)=>{
-            console.log(req)
+            //console.log(req)
             io.sockets.emit("new_delivery_request",req);
         });
         connected_socket.on("request_accepted_bydriver",(data)=>{
