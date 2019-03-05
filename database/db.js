@@ -8,9 +8,24 @@ const mongourl="mongodb://suab:Suab123@cluster0-shard-00-00-ynffd.mongodb.net:27
 mongoose.connect(mongourl,{useNewUrlParser:true},(err,db)=>{
     if(err)
         console.log("db.js 11"+err);
+    else
+       console.log("database connected");
 })
 
-const Order_Schema=new mongoose.Schema({
+const temp_Order_Schema=new mongoose.Schema({
+    User_id:String,
+    Commodity:String,
+    Receving_Address:String,
+    Delivery_Address:String,
+    Giver_Name:String,
+    Giver_Phone:String,
+    Recevier_Phone:String,
+    Recevier_Name:String,
+    Price:String,
+    Date:String
+})
+
+const perma_Order_Schema=new mongoose.Schema({
     User_id:String,
     Commodity:String,
     Receving_Address:String,
@@ -51,11 +66,14 @@ const perma_schema=new mongoose.Schema({
 
 const temp_model=mongoose.model('temp',temp_schema);
 const perma_model=mongoose.model('perma',perma_schema);
-const order_model=mongoose.model('order',Order_Schema);
+const temp_order_model=mongoose.model('temp_order',temp_Order_Schema);
+const perma_order_model=mongoose.model('perma_order',perma_Order_Schema);
+
 
 module.exports={
     temp:temp_model,
     perma:perma_model,
-    order:order_model,
+    temp_order:temp_order_model,
+    perma_order:perma_order_model,
     mongourl
 }

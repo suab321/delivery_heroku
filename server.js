@@ -8,10 +8,11 @@ const MongoStore=require('connect-mongo')(session);
 const {mongourl}=require('./database/db');
 const cookieparser=require('cookie-parser');
 
+
 //importing from developer made folder
 const {auth_route}=require('./authentication/authenticate');
 const {order_route}=require('./placing_order/order');
-
+const sckt=require('./sockets/socket_fucn');
 
 //mongoose connection
 mongoose.connect(mongourl,{useNewUrlParser:true},(err,db)=>{
@@ -39,7 +40,13 @@ app.use(cookieparser());
 app.use('/authentication',auth_route);
 app.use('/order',order_route);
 
-app.listen(process.env.PORT || 3002);
+app.get('/',(req,res)=>{
+    res.sendFile(__dirname+'/views/test.html');
+})
+
+
+const port_connection=app.listen(process.env.PORT || 3002);
+sckt.connection(port_connection);
 
 
 
