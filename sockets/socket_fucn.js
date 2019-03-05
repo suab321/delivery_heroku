@@ -4,7 +4,7 @@ var io;
 var connected_socket;
 function connection(port){
     //console.log(port);
-    var io=socket(port);
+    io=socket(port);
     io.on('connection',socket=>{
         connected_socket=socket;
         console.log("made a connection");
