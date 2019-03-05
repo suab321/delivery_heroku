@@ -15,7 +15,7 @@ function connection(port){
             io.sockets.emit("new_delivery_request",req);
         });
         connected_socket.on("request_accepted_bydriver",(data)=>{
-            perma.findByIdAndUpdate({_id:data.User_id},{$pull:{'temp_History':{'Order_id':data._id}}},{$addToSet:{'perma_History':{'Order_id':data._id}}},{new:true}).then(user=>{
+            perma.findOneAndUpdate({_id:data.User_id},{$pull:{'temp_History':{'Order_id':data._id}}},{$addToSet:{'perma_History':{'Order_id':data._id}}},{new:true}).then(user=>{
                 temp_order.findByIdAndDelete({_id:data._id}).then(user=>{
                     const db=new perma_order
                     db.User_id=user.User_id;
