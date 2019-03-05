@@ -14,6 +14,6 @@
           socket1.emit("request",{msg:"A new request is generated"});
        })
        socket2.on("request_accepted_driver",(data)=>{console.log(data)
-      socket1.emit("request_accepted_driver",data)});
+      socket1.emit("request_accepted_bydriver",data)});
     </script>
 </html>

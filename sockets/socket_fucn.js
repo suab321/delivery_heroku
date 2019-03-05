@@ -1,5 +1,7 @@
 const socket=require('socket.io');
 
+const {}=require('../database/db');
+
 var io;
 var connected_socket;
 function connection(port){
@@ -12,7 +14,9 @@ function connection(port){
             console.log(req)
             io.sockets.emit("new_delivery_request",req);
         });
-        connected_socket.on("request_accepted_driver",(data)=>console.log(data));
+        connected_socket.on("request_accepted_bydriver",(data)=>{
+
+        });
     })
 }
 function emit_order(data){
