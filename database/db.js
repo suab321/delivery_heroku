@@ -65,8 +65,7 @@ const perma_schema=new mongoose.Schema({
     response:{type:String},
     My_Address:[{Place_Type:String,Value:[{value:String}]}],
     Delivery_Address:[{Value:String}],
-    temp_History:[{Order_id:String}],
-    perma_History:[{Order_id:String}]
+    History:[{Order_id:String,isAccepted:{type:Number,default:0}}],
 })
 
 const temp_model=mongoose.model('temp',temp_schema);

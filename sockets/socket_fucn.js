@@ -16,9 +16,11 @@ function connection(port){
         });
         connected_socket.on("request_accepted_bydriver",(data)=>{
             console.log(data);
-            perma.findOneAndUpdate({_id:data.User_id},{$pull:{'temp_History':{'Order_id':data._id}}}).then(user=>{
-                perma.findByIdAndUpdate({_id:data.User_id},{$adToSet:{'perma_Histroy':{'Order_id':data._id}}}).then(user=>{
-                temp_order.findByIdAndDelete({_id:data._id}).then(user=>{
+            perma.update({_id:data.User_id,'History.Order_id':data._id},
+            {$set:{'History.$.type':1}},(err,user)=>{
+                if(user){
+
+                    temp_order.findByIdAndDelete({_id:data._id}).then(user=>{
                     const db=new perma_order
                     db.User_id=user.User_id;
                     db.Commodity=user.Commodity;
@@ -35,8 +37,10 @@ function connection(port){
                         console.log("33 socket_fucn.js"+user);
                     }).catch(err=>{console.log(err)});
                 }).catch(err=>{console.log(err)});
+                
+                }
             })
-        })
+            
         });
     })
 }
