@@ -43,7 +43,7 @@ router.post('/place_order',verify,(req,res)=>{
             db.Price=req.body.Price,
             db.Date=new Date();
             db.save().then(user=>{
-                perma.findByIdAndUpdate({_id:userId},{$addToSet:{'temp_History':{"Order_id":user._id}}}).then(user=>{
+                perma.findByIdAndUpdate({_id:userId},{$addToSet:{'temp_History':{"Order_id":user._id}}},{new:true}).then(user=>{
                     sockets.emit_order(user);
                     res.status(200).json({response:"1"});
                 }).catch(err=>{
