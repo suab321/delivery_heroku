@@ -72,7 +72,7 @@ const perma_schema=new mongoose.Schema({
 const temp_model=mongoose.model('temp',temp_schema);
 const perma_model=mongoose.model('perma',perma_schema);
 const temp_order_model=mongoose.model('temp_order',temp_Order_Schema);
-const perma_order_model=mongoose.model('perma_order',perma_Order_Schema);
+const perma_order_model=mongoose.model('perma_model',perma_Order_Schema);
 
 
 module.exports={
