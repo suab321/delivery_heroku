@@ -20,23 +20,23 @@ function connection(port){
             {$set:{'History.$.isAccepted':1}},{new:true},(err,result)=>{
                 if(result){
                     console.log(result);
-                //     temp_order.findByIdAndDelete({_id:data._id}).then(user=>{
-                //     const db=new perma_order
-                //     db.User_id=user.User_id;
-                //     db.Commodity=user.Commodity;
-                //     db.Receving_Address=user.Receving_Address;
-                //     db.Delivery_Address=user.Delivery_Address;
-                //     db.Giver_Name=user.Giver_Name;
-                //     db.Giver_Phone=user.Giver_Phone;
-                //     db.Recevier_Phone=user.Recevier_Phone;
-                //     db.Recevier_Name=user.Recevier_Name;
-                //     db.Recevier_Email=user.Recevier_Email;
-                //     db.Price=user.Price,
-                //     db.Date=new Date();
-                //     db.save().then(user=>{
-                //         console.log("33 socket_fucn.js"+user);
-                //     }).catch(err=>{console.log(err)});
-                // }).catch(err=>{console.log(err)});
+                    temp_order.findByIdAndDelete({_id:data._id}).then(user=>{
+                    const db=new perma_order
+                    db.User_id=user.User_id;
+                    db.Commodity=user.Commodity;
+                    db.Receving_Address=user.Receving_Address;
+                    db.Delivery_Address=user.Delivery_Address;
+                    db.Giver_Name=user.Giver_Name;
+                    db.Giver_Phone=user.Giver_Phone;
+                    db.Recevier_Phone=user.Recevier_Phone;
+                    db.Recevier_Name=user.Recevier_Name;
+                    db.Recevier_Email=user.Recevier_Email;
+                    db.Price=user.Price,
+                    db.Date=new Date();
+                    db.save().then(user=>{
+                        console.log("33 socket_fucn.js"+user);
+                    }).catch(err=>{console.log(err)});
+                }).catch(err=>{console.log(err)});
                 
                 }
             })
