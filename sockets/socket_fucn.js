@@ -17,13 +17,14 @@ function connection(port){
         });
         connected_socket.on("request_accepted_bydriver",(data)=>{
             console.log("19 socket_fucn"+data);
+            console.log(data.data);
             perma.update({_id:data.User_id,'History.Order_id':data._id},
             {$set:{'History.$.CurrentStatus':1}},{new:true},(err,result)=>{
                 if(result){
                     console.log("23 socket_fucn"+result);
                 }
                 else if(err)
-                    console.log("26 socket_fucn"+err)
+                    console.log("26 socket_fucn"+err);
             })
             var unique_no=Math.floor(Math.random()*10000);
             authentication.sendOTP(data.Recevier_Email,unique_no);
