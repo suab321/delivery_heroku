@@ -13,8 +13,8 @@ mongoose.connect(mongourl,{useNewUrlParser:true},(err,db)=>{
 })
 
 const temp_Order_Schema=new mongoose.Schema({
-    User_id:String,
-    Driver_id:String,
+    User_id:{type:String,required:true},
+    Driver_id:{String},
     Commodity:String,
     Receving_Address:String,
     Delivery_Address:String,
@@ -28,7 +28,7 @@ const temp_Order_Schema=new mongoose.Schema({
 })
 
 const perma_Order_Schema=new mongoose.Schema({
-    User_id:String,
+    User_id:{type:String,required:true},
     Driver_id:String,
     Commodity:String,
     Receving_Address:String,

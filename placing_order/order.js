@@ -32,7 +32,7 @@ router.post('/place_order',verify,(req,res)=>{
    console.log(userId);
     if(userId){
            const db=new temp_order
-            db.User_id=req.body.User_id;
+            db.User_id=userId;
             db.Commodity=req.body.Commodity;
             db.Receving_Address=req.body.Receving_Address;
             db.Delivery_Address=req.body.Delivery_Address;
