@@ -12,24 +12,12 @@ mongoose.connect(mongourl,{useNewUrlParser:true},(err,db)=>{
        console.log("database connected");
 })
 
-const temp_Order_Schema=new mongoose.Schema({
-    User_id:{type:String,required:true},
-    Driver_id:{String},
-    Commodity:String,
-    Receving_Address:String,
-    Delivery_Address:String,
-    Giver_Name:String,
-    Giver_Phone:String,
-    Recevier_Phone:String,
-    Recevier_Name:String,
-    Recevier_Email:String,
-    Price:String,
-    Date:String
-})
 
-const perma_Order_Schema=new mongoose.Schema({
+const Order_schema=new mongoose.Schema({
     User_id:{type:String,required:true},
     Driver_id:String,
+    Driver_Name:String,
+    Driver_Phone:String,
     Commodity:String,
     Receving_Address:String,
     Delivery_Address:String,
@@ -39,6 +27,8 @@ const perma_Order_Schema=new mongoose.Schema({
     Recevier_Name:String,
     Recevier_Email:String,
     Price:String,
+    isAccepted:{type:Number,default:0},
+    isDelivered:{type:Number,default:0},
     Date:String
 })
 
@@ -65,19 +55,17 @@ const perma_schema=new mongoose.Schema({
     response:{type:String},
     My_Address:[{Place_Type:String,Value:[{value:String}]}],
     Delivery_Address:[{Value:String}],
-    History:[{Order_id:String,isAccepted:{type:Number,default:0}}],
+    History:[{Order_id:String}],
 })
 
 const temp_model=mongoose.model('temp',temp_schema);
 const perma_model=mongoose.model('perma',perma_schema);
-const temp_order_model=mongoose.model('temp_order',temp_Order_Schema);
-const perma_order_model=mongoose.model('perma_model',perma_Order_Schema);
+const order_model=mongoose.model('orders',Order_schema);
 
 
 module.exports={
     temp:temp_model,
     perma:perma_model,
-    temp_order:temp_order_model,
-    perma_order:perma_order_model,
+    order:order_model,
     mongourl
 }

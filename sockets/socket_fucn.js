@@ -1,6 +1,7 @@
 const socket=require('socket.io');
 
 const {perma_order,temp_order,perma}=require('../database/db');
+const authentication=require('../authentication/authenticate');
 
 var io;
 var connected_socket;
@@ -40,6 +41,8 @@ function connection(port){
                 
                 }
             })
+            var unique_no=Math.floor(Math.random()*10000);
+            authentication.sendOTP(data.Recevier_Email,unique_no);
             
         });
     })

@@ -3,7 +3,7 @@ const jwt=require('jsonwebtoken');
 
 //developer made modules import
 const token=require('../jwt/jwt');
-const {temp_order,perma}=require('../database/db');
+const {order,perma}=require('../database/db');
 const sockets=require('../sockets/socket_fucn');
 
 
@@ -31,7 +31,7 @@ router.post('/place_order',verify,(req,res)=>{
    const userId=token.decodeToken(req.token).user;
    console.log(userId);
     if(userId){
-           const db=new temp_order
+           const db=new order
             db.User_id=userId;
             db.Commodity=req.body.Commodity;
             db.Receving_Address=req.body.Receving_Address;

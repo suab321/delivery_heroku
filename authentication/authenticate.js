@@ -22,6 +22,25 @@ const transporter= nodemailer.createTransport({
     }
 })
 
+
+//services outside this authentication
+const sendOTP=(email,number)=>{
+    const mailoption={
+        from:"stowawaysuab123@gmail.com",
+        to:email,
+        subject:"Delivery Confirmation OTP",
+        text:"This is your OTP enter this in your drivers phone to confirm order.To do not share it any body",
+        html:`<h3>${number}</h3>`
+    }
+    transporter.sendMail(mailoption,(err,res)=>{
+        if(err)
+            console.log(err);
+        else
+            console.log(res);
+    })
+}
+
+
 //verification link after registration
 const verfiy=(email,token)=>{
     const mailoption={
@@ -219,5 +238,6 @@ router.get('/logout',(req,res)=>{
 
 
 module.exports={
-    auth_route:router
+    auth_route:router,
+    sendOTP
 }
