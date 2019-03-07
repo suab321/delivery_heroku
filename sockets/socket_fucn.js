@@ -27,8 +27,6 @@ function connection(port){
             })
             var unique_no=Math.floor(Math.random()*10000);
             authentication.sendOTP(data.Recevier_Email,unique_no);
-
-            s
         });
     })
 }
