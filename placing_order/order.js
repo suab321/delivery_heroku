@@ -29,6 +29,7 @@ const verify=(req,res,next)=>{
 router.post('/place_order',verify,(req,res)=>{
     console.log(req.token);
    const userId=token.decodeToken(req.token).user;
+   console.log(userId);
     if(userId){
            const db=new temp_order
             db.User_id=req.body.User_id;
