@@ -22,7 +22,7 @@ function connection(port){
             {$set:{'History.$.CurrentStatus':1}},{new:true},(err,result)=>{
                 if(result){
                     order.findByIdAndUpdate({_id:data.data._id},{CurrentStatus:1}).then(user=>{
-                        socket.emit("successfully accpeted",data.sender_unique);
+                        io.socket.emit("successfully accpeted",data.sender_unique);
                     }).catch(err=>console.log("26 socket_fucn"+err))
                 }
                 else if(err)
