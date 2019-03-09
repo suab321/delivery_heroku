@@ -22,14 +22,14 @@ function connection(port){
             {$set:{'History.$.CurrentStatus':1}},{new:true},(err,result)=>{
                 if(result){
                     order.findByIdAndUpdate({_id:data.data._id},{CurrentStatus:1}).then(user=>{
-                        io.sockets.emit("successfully_accpeted",data.sender_unique);
                     }).catch(err=>console.log("26 socket_fucn"+err))
                 }
                 else if(err)
                     console.log("26 socket_fucn"+err);
             })
-            var unique_no=Math.floor(Math.random()*10000);
+            var unique_no=Math.floor(Math.random()*1000);
             authentication.sendOTP(data.data.Recevier_Email,unique_no);
+            authentication.sendOTP(data.data.Sender_Email,unique_no);
         });
     })
 }
