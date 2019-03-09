@@ -16,8 +16,6 @@ mongoose.connect(mongourl,{useNewUrlParser:true},(err,db)=>{
 const Order_schema=new mongoose.Schema({
     User_id:{type:String,required:true},
     Driver_id:String,
-    Driver_Name:String,
-    Driver_Phone:String,
     Commodity:String,
     Receving_Address:String,
     Delivery_Address:String,
