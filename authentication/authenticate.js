@@ -21,7 +21,7 @@ const get_token=(req,res,next)=>{
         next();
     }
     else
-        res.status(401).json({err:"Not authorised"});
+        res.status(401).json({err:"0"});
 }
 
 const transporter= nodemailer.createTransport({
@@ -185,7 +185,7 @@ router.post('/login',(req,res)=>{
                 perma.findById({_id:user.id},{Password:false}).then(user=>{
                     req.session.user=user._id;
                     const enct=token.generateToken(user._id);
-                   res.status(200).json({key:enct});
+                   res.status(200).json({key:enct,response:"1"});
                 })
             }
         else
@@ -227,7 +227,7 @@ router.get('/resetpass',get_token,(req,res)=>{
     })
   }
   else
-    res.status(401).json({err:"Not authorised"});
+    res.status(401).json({err:"0"});
 })
 
 
@@ -235,7 +235,7 @@ router.get('/resetpass',get_token,(req,res)=>{
 router.post('/ressetingdone/:token',(req,res)=>{
     jwt.verify(req.params.token,"suab",(err,authdata)=>{
         perma.findOneAndUpdate({Email:authdata.user},{Password:req.body.password},{new:true}).then(user=>{
-            res.status(200).json({msg:"Successfully changed"});
+            res.status(200).json({msg:"1"});
         }).catch(err=>{res.send(req.params.email)})
     })
 })
@@ -248,10 +248,10 @@ router.get('/reseting/:token',(req,res)=>{
 //loggingOut from mongo session
 router.get('/logout',(req,res)=>{
     if(req.session.user && req.cookies.user_sid){
-        res.clearCookie('user_sid').json("LoggedOut");
+        res.clearCookie('user_sid').json({res:"1"});
     }
     else
-        res.status(401).json("no session is pending!")
+        res.status(401).json({err:"0"})
 })
 
 
@@ -263,13 +263,13 @@ router.get('/user_details',get_token,(req,res)=>{
             if(user)
                 res.status(200).json(user);
             else
-                res.status(200).json({err:"No one is available with your credentials"});
+                res.status(200).json({err:"0"});
         }).catch(err=>{
-            res.status(400).json({err:"There exist a problem with this credentials"});
+            res.status(400).json({err:"0"});
         })
     }
     else
-        res.status(401).json("You are not authorised to access data");
+        res.status(401).json({err:"0"});
 })
 
 module.exports={

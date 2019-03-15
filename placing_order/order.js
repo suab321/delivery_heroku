@@ -11,7 +11,7 @@ router.use(function check(req,res,next){
     if(req.session.user)
         next();
     else
-        res.status(401).json("Session is required to access it");
+        res.status(401).json({err:"0"});
 })
 
 const verify=(req,res,next)=>{
@@ -21,7 +21,7 @@ const verify=(req,res,next)=>{
     next();
     }
     else{
-        res.status(401).json("not authorized");
+        res.status(401).json({err:"0"});
     }
 }
 
