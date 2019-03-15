@@ -41,7 +41,8 @@ router.post('/place_order',verify,(req,res)=>{
             db.Recevier_Phone=req.body.Recevier_Phone;
             db.Recevier_Name=req.body.Recevier_Name;
             db.Recevier_Email=req.body.Recevier_Email;
-            db.Price=req.body.Price,
+            db.Price=req.body.Price;
+            db.Weight=req.body.Weight;
             db.Date=new Date();
             db.save().then(user=>{
                 //console.log(user);
