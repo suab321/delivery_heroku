@@ -21,7 +21,7 @@ const verify=(req,res,next)=>{
     next();
     }
     else{
-        res.status(401).json({err:"0"});
+        res.status(401).json({err:"1"});
     }
 }
 
@@ -58,7 +58,7 @@ router.post('/place_order',verify,(req,res)=>{
             })
     }
     else
-        res.status(401).json({err:"0"});
+        res.status(401).json({err:"2"});
 })
 
 module.exports={
