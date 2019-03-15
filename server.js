@@ -7,6 +7,7 @@ const mongoose=require('mongoose');
 const MongoStore=require('connect-mongo')(session);
 const {mongourl}=require('./database/db');
 const cookieparser=require('cookie-parser');
+const cors=require('cors');
 
 
 //importing from developer made folder
@@ -20,6 +21,7 @@ mongoose.connect(mongourl,{useNewUrlParser:true},(err,db)=>{
         console.log("server.js 15"+err);
 })
 //middlewares
+app.use(cors());
 app.use(bodyparser.urlencoded({extended:false}));
 app.use(bodyparser.json());
 app.set('view engine','ejs');
