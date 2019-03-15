@@ -8,10 +8,7 @@ const sockets=require('../sockets/socket_fucn');
 
 
 router.use(function check(req,res,next){
-    if(req.session.user)
-        next();
-    else
-        res.status(401).json({err:"0"});
+   next();
 })
 
 const verify=(req,res,next)=>{
