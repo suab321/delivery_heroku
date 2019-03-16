@@ -290,9 +290,9 @@ router.get('/order_history',get_token,(req,res)=>{
                     if(order1.indexOf(i._id) !== -1)
                         data.push(i);
                 })
+                console.log(data);
+                 res.status(200).json(data);
             })
-            console.log(data);
-            res.status(200).json(data);
         })
     }
     else
