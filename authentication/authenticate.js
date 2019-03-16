@@ -287,7 +287,7 @@ router.get('/order_history',get_token,(req,res)=>{
             console.log(order1);
             order.find({}).then(user=>{
                 user.map(i=>{
-                    if(order1.indexOf(i._id))
+                    if(order1.indexOf(i._id) !== -1)
                         data.push(i);
                 })
             })
