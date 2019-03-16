@@ -29,7 +29,7 @@ function connection(port){
             })
             var unique_no=Math.floor(Math.random()*1000);
             authentication.sendOTP(data.data.Recevier_Email,unique_no);
-            authentication.sendOTP(data.data.Sender_Email,unique_no);
+            authentication.sendOTP(data.data.Giver_Email,unique_no);
         });
     })
 }

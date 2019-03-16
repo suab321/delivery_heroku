@@ -21,6 +21,7 @@ const Order_schema=new mongoose.Schema({
     Delivery_Address:String,
     Giver_Name:String,
     Giver_Phone:String,
+    Giver_Email:String,
     Recevier_Phone:String,
     Recevier_Name:String,
     Recevier_Email:String,

@@ -34,6 +34,7 @@ router.post('/place_order',verify,(req,res)=>{
             db.Receving_Address=req.body.Receving_Address;
             db.Delivery_Address=req.body.Delivery_Address;
             db.Giver_Name=req.body.Giver_Name;
+            db.Giver_Email=req.body.Giver_Email;
             db.Giver_Phone=req.body.Giver_Phone;
             db.Recevier_Phone=req.body.Recevier_Phone;
             db.Recevier_Name=req.body.Recevier_Name;
