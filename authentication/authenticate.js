@@ -284,6 +284,7 @@ router.get('/order_history',get_token,(req,res)=>{
             const data=[];
             console.log(orders);
             orders=JSON.stringify(orders);
+            console.log(orders);
             orders.forEach(i=>{
                 order.findById({_id:i}).then(user=>{
                     data.push(user);
