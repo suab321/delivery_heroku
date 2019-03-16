@@ -280,8 +280,9 @@ router.get('/order_history',get_token,(req,res)=>{
             const orders=user.History.map(i=>{
                 return i.Order_id;
             })
-            console.log("283 authenticate.js"+orders);
+            //console.log("283 authenticate.js "+orders);
             const data=[];
+            console.log(ordes);
             orders=JSON.stringify(orders);
             orders.forEach(i=>{
                 order.findById({_id:i}).then(user=>{
