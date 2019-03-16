@@ -282,7 +282,7 @@ router.get('/order_history',get_token,(req,res)=>{
             })
             //console.log("283 authenticate.js "+orders);
             const data=[];
-            console.log(ordes);
+            console.log(orders);
             orders=JSON.stringify(orders);
             orders.forEach(i=>{
                 order.findById({_id:i}).then(user=>{
