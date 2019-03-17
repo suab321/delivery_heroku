@@ -28,7 +28,8 @@ const Order_schema=new mongoose.Schema({
     Price:String,
     CurrentStatus:{type:Number,default:0},
     Weight:String,
-    Date:String
+    Date:String,
+    Preferred_time:String
 })
 
 const temp_schema=new mongoose.Schema({

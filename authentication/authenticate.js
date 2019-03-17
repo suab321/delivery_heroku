@@ -283,6 +283,16 @@ router.get('/order_history',get_token,(req,res)=>{
     else
         res.status(401).json({err:"1"});
 })
+//updating order status when it is completed
+router.post("/order_complete",(req,res)=>{
+    order.findByIdAndUpdate({_id:req.body.order_id},{CurrentStatus:2}).then(user=>{
+        if(user)
+            res.status(200).json("Updated");
+    }).catch(err=>{
+        res.status(400).json(err);
+    })
+})
+
 
 module.exports={
     auth_route:router,
