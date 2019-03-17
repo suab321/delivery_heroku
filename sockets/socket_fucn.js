@@ -28,8 +28,8 @@ function connection(port){
                     console.log("26 socket_fucn"+err);
             })
             var unique_no=Math.floor(Math.random()*1000);
-            authentication.sendOTP(data.data.Recevier_Email,unique_no);
-            authentication.sendOTP(data.data.Giver_Email,unique_no);
+            authentication.sendOTP(data.data.Recevier_Email,data.recevier_unique);
+            authentication.sendOTP(data.data.Giver_Email,data.sender_unique);
         });
     })
 }
