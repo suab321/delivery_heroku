@@ -42,7 +42,7 @@ router.post('/place_order',verify,(req,res)=>{
             db.Price=req.body.Price;
             db.Weight=req.body.Weight;
             db.Date=new Date();
-            Preferred_time=req.body.time;
+            db.Preferred_time=req.body.time;
             db.save().then(user=>{
                 //console.log(user);
                 perma.findByIdAndUpdate({_id:userId},{$addToSet:{'History':{"Order_id":user._id}}}).then(res1=>{
