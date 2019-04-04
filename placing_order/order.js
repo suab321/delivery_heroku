@@ -5,6 +5,7 @@ const jwt=require('jsonwebtoken');
 const token=require('../jwt/jwt');
 const {order,perma}=require('../database/db');
 const sockets=require('../sockets/socket_fucn');
+const {notify}=require('../fcm/Notify');
 
 
 router.use(function check(req,res,next){
@@ -44,9 +45,8 @@ router.post('/place_order',verify,(req,res)=>{
             db.Date=new Date();
             db.Preferred_time=req.body.time;
             db.save().then(user=>{
-                //console.log(user);
                 perma.findByIdAndUpdate({_id:userId},{$addToSet:{'History':{"Order_id":user._id}}}).then(res1=>{
-                    //console.log(user);
+                    notify(user);
                     sockets.emit_order(user);
                     res.status(200).json({response:"1"});
                 }).catch(err=>{

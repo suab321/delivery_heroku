@@ -6,7 +6,7 @@ const axios=require('axios');
 
 function notify(order){
 
-    axios.get(`http://localhost:3003/authentication/get_driver`).then(res=>{
+    axios.get(`https://fast-reef-53121.herokuapp.com/authentication/get_driver`).then(res=>{
         if(res.status === 200){
             console.log(res.data)
             var users=res.data;
