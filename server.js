@@ -12,7 +12,6 @@ const cookieparser=require('cookie-parser');
 const cors=require('cors');
 const axios=require('axios');
 
-console.log(process.env.KEY)
 //importing from developer made folder
 const {auth_route}=require('./authentication/authenticate');
 const {order_route}=require('./placing_order/order');
@@ -50,13 +49,7 @@ app.use('/order',order_route);
 app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/views/test.html');
 })
-app.get('/noti',(req,res)=>{
-    // console.log(req)
-    axios.get(`http://localhost:3003/authentication/get_driver`).then(res=>{
-        if(res.status === 200)
-            notify(res.data);
-    }).catch(err=>{res.json(err)});
-})
+
 
 
 const port_connection=app.listen(process.env.PORT || 3002);
