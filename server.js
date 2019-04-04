@@ -1,4 +1,8 @@
 //importing npm modules
+if(process.env.NODE_ENV !== 'production'){
+    require('dotenv').config();
+}
+
 const express=require('express');
 const bodyparser=require('body-parser');
 const app=express();
@@ -8,12 +12,15 @@ const MongoStore=require('connect-mongo')(session);
 const {mongourl}=require('./database/db');
 const cookieparser=require('cookie-parser');
 const cors=require('cors');
+const axios=require('axios');
 
-
+console.log(process.env.KEY)
 //importing from developer made folder
 const {auth_route}=require('./authentication/authenticate');
 const {order_route}=require('./placing_order/order');
 const sckt=require('./sockets/socket_fucn');
+const {notify}=require('./fcm/Notify');
+const {driver_backend}=require('./urls/links');
 
 //mongoose connection
 mongoose.connect(mongourl,{useNewUrlParser:true},(err,db)=>{
@@ -44,6 +51,13 @@ app.use('/order',order_route);
 
 app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/views/test.html');
+})
+app.get('/noti',(req,res)=>{
+    // console.log(req)
+    axios.get(`http://localhost:3003/authentication/get_driver`).then(res=>{
+        if(res.status === 200)
+            notify(res.data);
+    }).catch(err=>{res.json(err)});
 })
 
 
