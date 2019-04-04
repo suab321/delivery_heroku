@@ -30,7 +30,7 @@ function connection(port){
             authentication.sendOTP(data.data.Recevier_Email,data.recevier_unique);
             authentication.sendOTP(data.data.Giver_Email,data.sender_unique);
         });
-
+        
         connected_socket.on("user_from_user_frontend",data=>{
             io.sockets.emit("user_to_driver_frontend",data);
         })
