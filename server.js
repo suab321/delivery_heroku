@@ -1,7 +1,5 @@
 //importing npm modules
-if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config();
-}
 
 const express=require('express');
 const bodyparser=require('body-parser');
