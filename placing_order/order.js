@@ -23,9 +23,8 @@ const verify=(req,res,next)=>{
     }
 }
 
-
-router.post('/place_order',verify,(req,res)=>{
-    console.log(req.token);
+function new_order(order){
+   console.log(req.token);
    const userId=token.decodeToken(req.token).user;
    console.log(userId);
     if(userId){
@@ -58,10 +57,10 @@ router.post('/place_order',verify,(req,res)=>{
     }
     else
         res.status(401).json({err:"2"});
-})
-
+}
 module.exports={
-    order_route:router
+    order_route:router,
+    new_order
 }
 
 

@@ -17,7 +17,7 @@ var stripeHandler=StripeCheckout.configure({
                 amount:amount
             })
         }).then(res=>{
-            res.redirect('')
+            console.log("success");
         })
     }
 
@@ -25,6 +25,7 @@ var stripeHandler=StripeCheckout.configure({
 
 
 console.log("yes");
+console.log(charge*weight);
 stripeHandler.open({
-    amount:weight*charge
+    amount
 })

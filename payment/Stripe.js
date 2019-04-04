@@ -6,18 +6,19 @@ const publicKey="pk_test_mNSmGjYqswUKp1NnrGGuNk8f004q3h4DWh";
 const stripe=require('stripe')(secretKey);
 
 
-router.get('/pay_for_service',(req,res)=>{
-    res.render('payment',{order:{name:"abhinav",age:"23",weight:"12"},charge:"23",stripePublicKey:publicKey})
-})
+const {new_order}=require('../placing_order/order');
+
+
 
 router.post('/pay',(req,res)=>{
+    console.log(req.body);
     stripe.charges.create({
         amount: req.body.amount,
         source: req.body.stripeTokenId,
-        currency: 'INR'
+        currency: 'usd'
       }).then(function() {
         console.log('Charge Successful')
-        res.json({ message: 'Successfully purchased items' })
+        new_order(req.body.order);
       }).catch(function() {
         console.log('Charge Fail')
         res.status(500).end()

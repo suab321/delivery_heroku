@@ -55,7 +55,7 @@ app.get('/',(req,res)=>{
 
 
 app.get('/pay_for_service',(req,res)=>{
-    res.render('payment',{order:{name:"abhinav",age:"23",weight:"12"},charge:"23",stripePublicKey:publicKey})
+    res.render('payment',{order:req.body.order,charge:23,stripePublicKey:publicKey})
 })
 
 
