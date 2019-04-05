@@ -47,12 +47,12 @@ function new_order(order){
                 perma.findByIdAndUpdate({_id:userId},{$addToSet:{'History':{"Order_id":user._id}}}).then(res1=>{
                     notify(user);
                     sockets.emit_order(user);
-                    res.status(200).json({response:"1"});
+                    console.log(user);
                 }).catch(err=>{
-                    res.status(400).json("48"+err);
+                    console.log("order.js 52 "+err);
                 })
             }).catch(err=>{
-                res.status(400).json("51"+err);
+                console.log("order.js 55 "+err);
             })
     }
     else

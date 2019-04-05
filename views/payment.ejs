@@ -7,7 +7,7 @@
         <script src="https://checkout.stripe.com/checkout.js" defer></script>
         <script>
             var order='<%=order%>'
-            var weight='<%=order.weight%>'
+            var weight='<%=order.Weight%>'
             var stripekey='<%= stripePublicKey%>';
             var charge='<%= charge %>';
             var amount=weight*charge;

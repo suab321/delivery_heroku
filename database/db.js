@@ -12,6 +12,9 @@ mongoose.connect(mongourl,{useNewUrlParser:true},(err,db)=>{
        console.log("database connected");
 })
 
+const Price_Schema=new mongoose.Schema({
+    charge:String
+})
 
 const Order_schema=new mongoose.Schema({
     User_id:{type:String,required:true},
@@ -61,11 +64,13 @@ const perma_schema=new mongoose.Schema({
 const temp_model=mongoose.model('temp',temp_schema);
 const perma_model=mongoose.model('perma',perma_schema);
 const order_model=mongoose.model('orders',Order_schema);
+const price_model=mongoose.model('price',Price_Schema);
 
 
 module.exports={
     temp:temp_model,
     perma:perma_model,
     order:order_model,
+    price:price_model,
     mongourl
 }

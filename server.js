@@ -19,6 +19,8 @@ const sckt=require('./sockets/socket_fucn');
 const {payment_route}=require('./payment/Stripe');
 const secretKey="sk_test_Wae1JVypvlaoK5pLIFPsrexC0060Ik7P4F";
 const publicKey="pk_test_mNSmGjYqswUKp1NnrGGuNk8f004q3h4DWh";
+const {price,perma}=require('./database/db');
+const {decodeToken}=require('./jwt/jwt');
 
 
 //mongoose connection
@@ -53,9 +55,34 @@ app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/views/test.html');
 })
 
+const verify=(req,res,next)=>{
+    const token=req.headers['authorization'];
+    if(token !== undefined){
+        req.token=token.split(' ')[1];
+        next();
+    }
+    else
+        res.status(401).json({response:'0'})
+}
 
-app.get('/pay_for_service',(req,res)=>{
-    res.render('payment',{order:req.body.order,charge:23,stripePublicKey:publicKey})
+//route for payment
+app.post('/pay_for_service',verify,(req,res)=>{
+    const user_id=decodeToken(req.token).user;
+    if(user_id){
+    perma.findById({_id:user_id}).then(user=>{
+        if(user){
+            price.findById({}).then(user=>{
+                res.render('payment',{order:req.body.order,charge:user[0].charge,stripePublicKey:publicKey})
+            })
+        }
+        else
+            res.status(401).json({response:'1'})
+    })
+    }
+    else{
+        res.status(401).json({response:'2'});
+    }
+    
 })
 
 

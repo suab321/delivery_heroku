@@ -19,9 +19,10 @@ router.post('/pay',(req,res)=>{
       }).then(function() {
         console.log('Charge Successful')
         new_order(req.body.order);
+        res.json("Your Order is placed");
       }).catch(function() {
         console.log('Charge Fail')
-        res.status(500).end()
+        res.send("Your transaction failed..Try again after sometime");
       })
 })
 
