@@ -65,9 +65,9 @@ const verify=(req,res,next)=>{
         res.status(401).json({response:'0'})
 }
 
-app.get('/pay_for_service1',(req,res)=>{
+app.get('/pay_for_service1/:weight',(req,res)=>{
             price.find({}).then(user=>{
-                res.render('payment',{order:{Weight:12},charge:user[0].charge,stripePublicKey:publicKey})
+                res.render('payment',{order:{Weight:req.params.weight},charge:user[0].charge,stripePublicKey:publicKey})
             }).catch(err=>{
                 console.log(err)
             })

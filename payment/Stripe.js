@@ -17,9 +17,8 @@ router.post('/pay',(req,res)=>{
         source: req.body.stripeTokenId,
         currency: 'usd'
       }).then(function() {
-        console.log('Charge Successful')
         //new_order(req.body.order);
-        res.json("Your Order is placed");
+        res.json({response:1});
       }).catch(function() {
         console.log('Charge Fail')
         res.send("Your transaction failed..Try again after sometime");
