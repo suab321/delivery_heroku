@@ -17,7 +17,9 @@ var stripeHandler=StripeCheckout.configure({
                 amount:amount
             })
         }).then(res=>{
-            console.log("success");
+            return res.json({response:1});
+        }).then(data=>{
+            alert("Payment is successful");
         })
     }
 
