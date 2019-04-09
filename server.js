@@ -65,6 +65,15 @@ const verify=(req,res,next)=>{
         res.status(401).json({response:'0'})
 }
 
+app.get('/pay_for_service1',(req,res)=>{
+            price.find({}).then(user=>{
+                res.render('payment',{order:{Weight:12},charge:user[0].charge,stripePublicKey:publicKey})
+            }).catch(err=>{
+                console.log(err)
+            })
+    
+})
+
 //route for payment
 app.post('/pay_for_service',verify,(req,res)=>{
     const user_id=decodeToken(req.token).user;
@@ -84,7 +93,7 @@ app.post('/pay_for_service',verify,(req,res)=>{
     }
     
 })
-
+//route payment
 
 const port_connection=app.listen(process.env.PORT || 3002);
 sckt.connection(port_connection);

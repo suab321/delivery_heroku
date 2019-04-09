@@ -18,7 +18,7 @@ router.post('/pay',(req,res)=>{
         currency: 'usd'
       }).then(function() {
         console.log('Charge Successful')
-        new_order(req.body.order);
+        //new_order(req.body.order);
         res.json("Your Order is placed");
       }).catch(function() {
         console.log('Charge Fail')
