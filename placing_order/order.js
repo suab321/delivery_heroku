@@ -45,9 +45,9 @@ router.post('/temp_place_order',verify,(req,res)=>{
              db.Date=new Date();
              db.Preferred_time=req.body.time;
              db.save().then(user=>{
-                res.status(200).json(user);
+                res.status(200).json({user,response:1});
              }).catch(err=>{
-                 console.log("order.js 50 "+err);
+                 console.log({response:0});
              })
      }
      else
