@@ -19,7 +19,7 @@ var stripeHandler=StripeCheckout.configure({
         }).then(res=>{
             return res.json({response:1});
         }).then(data=>{
-           alert("order is completed");
+           alert("Payment was successfully Press Back to Continue");
         })
     }
 

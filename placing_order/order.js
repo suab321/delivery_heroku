@@ -47,7 +47,7 @@ router.post('/temp_place_order',verify,(req,res)=>{
              db.save().then(user=>{
                 res.status(200).json(user);
              }).catch(err=>{
-                 console.log("order.js 55 "+err);
+                 console.log("order.js 50 "+err);
              })
      }
      else
@@ -58,6 +58,7 @@ router.post('/temp_place_order',verify,(req,res)=>{
 //saving from temp to perma///
 function save(id){
     temp_order.findByIdAndDelete({_id:id}).then(user=>{
+        console.log(user);
             const db=new order
             db.User_id=user.User_id;
             db.Commodity=user.Commodity;
