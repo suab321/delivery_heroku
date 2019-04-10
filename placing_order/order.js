@@ -55,7 +55,40 @@ router.post('/temp_place_order',verify,(req,res)=>{
  })
 ////route ended//////
 
-
+//saving from temp to perma///
+function save(id){
+    temp_order.findByIdAndDelete({_id:id}).then(user=>{
+            const db=new order
+            db.User_id=req.User_id
+            db.Commodity=user.Commodity;
+            db.Receving_Address=user.Receving_Address;
+            db.Delivery_Address=user.Delivery_Address;
+            db.Giver_Name=user.Giver_Name;
+            db.Giver_Email=user.Giver_Email;
+            db.Giver_Phone=user.Giver_Phone;
+            db.Recevier_Phone=user.Recevier_Phone;
+            db.Recevier_Name=user.Recevier_Name;
+            db.Recevier_Email=user.Recevier_Email;
+            db.Price=user.Price;
+            db.Weight=user.Weight;
+            db.Date=user.Date;
+            db.Preferred_time=user.Preferred_time;
+            db.save().then(user=>{
+                perma.findByIdAndUpdate({_id:userId},{$addToSet:{'History':{"Order_id":user._id}}}).then(res1=>{
+                    notify(user);
+                    sockets.emit_order(user);
+                    console.log(user);
+                }).catch(err=>{
+                    console.log("order.js 52 "+err);
+                })
+            }).catch(err=>{
+                console.log("order.js 55 "+err);
+            })
+    }).catch(err=>{
+        console.log(err);
+    })
+}
+///function saving perma into 
 
 
 //route for permanant order route
@@ -99,7 +132,7 @@ router.post('/place_order',verify,(req,res)=>{
 
 module.exports={
     order_route:router,
-    //new_order
+    save
 }
 
 

@@ -6,8 +6,8 @@ const publicKey="pk_test_mNSmGjYqswUKp1NnrGGuNk8f004q3h4DWh";
 const stripe=require('stripe')(secretKey);
 
 
-const {new_order}=require('../placing_order/order');
-
+const {save}=require('../placing_order/order');
+const {emit_transaction_complete}=require('../sockets/socket_fucn')
 
 
 router.post('/pay',(req,res)=>{
@@ -17,6 +17,7 @@ router.post('/pay',(req,res)=>{
         source: req.body.stripeTokenId,
         currency: 'usd'
       }).then(function(res) {
+        save(req.body.order_id);
         console.log(res);
       }).catch(function() {
         console.log('Charge Fail')
