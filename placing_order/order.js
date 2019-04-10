@@ -45,7 +45,7 @@ router.post('/temp_place_order',verify,(req,res)=>{
              db.Date=new Date();
              db.Preferred_time=req.body.time;
              db.save().then(user=>{
-                res.redirect(`pay_for_service1?weight=${user.Weight}&order_id=${user._id}`);
+                res.status(200).json(user);
              }).catch(err=>{
                  console.log("order.js 55 "+err);
              })
