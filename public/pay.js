@@ -13,13 +13,13 @@ var stripeHandler=StripeCheckout.configure({
             },
             body:JSON.stringify({
                 stripeTokenId:token.id,
-                order:order,
+                order_id:order_id,
                 amount:amount
             })
         }).then(res=>{
             return res.json({response:1});
         }).then(data=>{
-            alert("Payment is successful");
+           alert("order is completed");
         })
     }
 

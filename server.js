@@ -66,13 +66,12 @@ const verify=(req,res,next)=>{
 }
 
 app.get('/pay_for_service1',(req,res)=>{
-    console.log(req.query.weight);
+    console.log(req.query);
             price.find({}).then(user=>{
-                res.render('payment',{order:{Weight:req.query.weight},charge:user[0].charge,stripePublicKey:publicKey})
+                res.render('payment',{order_id:req.query.order_id,weight:req.query.weight,charge:user[0].charge,stripePublicKey:publicKey})
             }).catch(err=>{
                 console.log(err)
             })
-    
 })
 
 //route for payment

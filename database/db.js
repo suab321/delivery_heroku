@@ -35,6 +35,27 @@ const Order_schema=new mongoose.Schema({
     Preferred_time:String
 })
 
+const temp_Order_schema=new mongoose.Schema({
+    User_id:{type:String,required:true},
+    Driver_id:String,
+    Commodity:String,
+    Receving_Address:String,
+    Delivery_Address:String,
+    Giver_Name:String,
+    Giver_Phone:String,
+    Giver_Email:String,
+    Recevier_Phone:String,
+    Recevier_Name:String,
+    Recevier_Email:String,
+    Price:String,
+    CurrentStatus:{type:Number,default:0},
+    Weight:String,
+    Date:String,
+    Preferred_time:String
+})
+
+
+
 const temp_schema=new mongoose.Schema({
     device_id:String,
     Name:String,
@@ -65,12 +86,14 @@ const temp_model=mongoose.model('temp',temp_schema);
 const perma_model=mongoose.model('perma',perma_schema);
 const order_model=mongoose.model('orders',Order_schema);
 const price_model=mongoose.model('price',Price_Schema);
+const temp_order=mongoose.model('temp-order',temp_Order_schema);
 
 
 module.exports={
     temp:temp_model,
     perma:perma_model,
     order:order_model,
+    temp_order:temp_order,
     price:price_model,
     mongourl
 }
