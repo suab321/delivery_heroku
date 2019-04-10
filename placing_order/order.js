@@ -59,7 +59,7 @@ router.post('/temp_place_order',verify,(req,res)=>{
 function save(id){
     temp_order.findByIdAndDelete({_id:id}).then(user=>{
             const db=new order
-            db.User_id=req.User_id
+            db.User_id=user.User_id;
             db.Commodity=user.Commodity;
             db.Receving_Address=user.Receving_Address;
             db.Delivery_Address=user.Delivery_Address;
