@@ -4,7 +4,7 @@ const jwt=require('jsonwebtoken');
 //developer made modules import
 const token=require('../jwt/jwt');
 const {order,perma,temp_order}=require('../database/db');
-const sockets=require('../sockets/socket_fucn');
+const {emit_order}=require('../sockets/socket_fucn');
 const {notify}=require('../fcm/Notify');
 
 
@@ -77,7 +77,7 @@ function save(id){
             db.save().then(user=>{
                 perma.findByIdAndUpdate({_id:user.id},{$addToSet:{'History':{"Order_id":user._id}}}).then(res1=>{
                     notify(user);
-                    sockets.emit_order(user);
+                    emit_order(user);
                     console.log(user);
                 }).catch(err=>{
                     console.log("order.js 52 "+err);
