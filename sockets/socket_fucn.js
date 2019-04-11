@@ -21,7 +21,7 @@ function connection(port){
             perma.update({_id:data.data.User_id,'History.Order_id':data.data._id},
             {$set:{'History.$.CurrentStatus':1}},{new:true},(err,result)=>{
                 if(result){
-                    order.findByIdAndUpdate({_id:data.data._id},{CurrentStatus:1}).then(user=>{
+                    order.findByIdAndUpdate({_id:data.data.Order_id},{CurrentStatus:1,Driver_id:data.data.Driver_id}).then(user=>{
                     }).catch(err=>console.log("26 socket_fucn"+err))
                 }
                 else if(err)
