@@ -75,7 +75,7 @@ function save(id){
             db.Date=user.Date;
             db.Preferred_time=user.Preferred_time;
             db.save().then(user=>{
-                perma.findByIdAndUpdate({_id:userId},{$addToSet:{'History':{"Order_id":user._id}}}).then(res1=>{
+                perma.findByIdAndUpdate({_id:user.id},{$addToSet:{'History':{"Order_id":user._id}}}).then(res1=>{
                     notify(user);
                     sockets.emit_order(user);
                     console.log(user);
