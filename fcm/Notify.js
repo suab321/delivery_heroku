@@ -26,7 +26,7 @@ function notify(order){
                 })
             })
         }
-    }).catch(err=>{res.json(err)});
+    }).catch(err=>{console.log(err)});
 }
 
 module.exports={
