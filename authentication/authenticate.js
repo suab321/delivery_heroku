@@ -185,6 +185,9 @@ router.post('/login',(req,res)=>{
                 perma.findById({_id:user.id},{Password:false}).then(user=>{
                     req.session.user=user._id;
                     const enct=token.generateToken(user._id);
+                    perma.findById({_id:user.id},{device_id:req.body.device_id},{new:true}).then(user=>{
+                        console.log
+                    })
                    res.status(200).json({key:enct,response:"1"});
                 })
             }
@@ -203,6 +206,31 @@ router.post('/login',(req,res)=>{
     })
 })
 })
+//logging in usersroute ended
+
+//updating users profile
+router.post('/update/:what/:value',get_token,(req,res)=>{
+    const user_id=token.decodeToken(req.token).user;
+    if(user_id){
+        switch(req.params.what){
+            case 1:
+            perma.findByIdAndUpdate({_id:user_id},{Name:req.params.value},{new:true}).then(user=>{
+                res.status(200).res({response:"1"});
+            }).catch(err=>{
+                res.status(400).json({response:"2"});
+            })
+                break;
+            case 2:
+            perma.findByIdAndUpdate({_id:user_id},{MobileNo:req.params.value},{new:true}).then(user=>{
+                res.status(200).res({response:"1"});
+            }).catch(err=>{
+                res.status(400).json({response:"2"});
+            })
+                break;
+        }
+    }
+})
+//updating users profile ended
 
 
 //reseting password email sending
