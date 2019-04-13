@@ -17,18 +17,18 @@ function connection(port){
         });
         connected_socket.on("request_accepted_bydriver",(data)=>{
             console.log("19 socket_fucn"+data);
-            console.log(data.data);
-            perma.update({_id:data.data.User_id,'History.Order_id':data.data._id},
+            console.log(data);
+            perma.update({_id:data.User_id,'History.Order_id':data._id},
             {$set:{'History.$.CurrentStatus':1}},{new:true},(err,result)=>{
                 if(result){
-                    order.findByIdAndUpdate({_id:data.data.Order_id},{CurrentStatus:1,Driver_id:data.data.Driver_id}).then(user=>{
+                    order.findByIdAndUpdate({_id:data.Order_id},{CurrentStatus:1,Driver_id:data.Driver_id}).then(user=>{
                     }).catch(err=>console.log("26 socket_fucn"+err))
                 }
                 else if(err)
                     console.log("26 socket_fucn"+err);
             })
-            authentication.sendOTP(data.data.Recevier_Email,data.recevier_unique);
-            authentication.sendOTP(data.data.Giver_Email,data.sender_unique);
+            authentication.sendOTP(data.Recevier_Email,data.recevier_unique);
+            authentication.sendOTP(data.Giver_Email,data.sender_unique);
         });
         
         connected_socket.on("user_from_user_frontend",data=>{
