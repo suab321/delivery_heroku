@@ -6,7 +6,7 @@ const publicKey="pk_test_mNSmGjYqswUKp1NnrGGuNk8f004q3h4DWh";
 const stripe=require('stripe')(secretKey);
 
 
-const {save}=require('../placing_order/order');
+const {save,Refund}=require('../placing_order/order');
 const {emit_transaction_complete}=require('../sockets/socket_fucn')
 
 
@@ -27,18 +27,19 @@ router.post('/pay',(req,res)=>{
       })
 })
 
-router.get('/refund/:charge_id',(req,res)=>{
+function refund(charge_id){
   stripe.refunds.create({
-    charge:req.params.charge_id
+    charge:charge_id
   }).then(refund=>{
-    console.log(refund)
-    res.status(200).json({response:"1"});
+    console.log(refund);
+    return 1;
   }).catch(err=>{
     console.log(err);
-    res.status(400).json({response:"0"});    
+    return 0;
   })
-})
+}
 
 module.exports={
-    payment_route:router
+    payment_route:router,
+    refund
 }

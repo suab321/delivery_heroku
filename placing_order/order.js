@@ -1,11 +1,14 @@
 const router=require('express').Router();
 const jwt=require('jsonwebtoken');
+const axios=require('axios');
 
 //developer made modules import
 const token=require('../jwt/jwt');
 const {order,perma,temp_order}=require('../database/db');
 const {emit_order}=require('../sockets/socket_fucn');
 const {notify}=require('../fcm/Notify');
+const {refund}=require('../payment/Stripe');
+const {driver_backend}=require('../urls/links')
 
 
 router.use(function check(req,res,next){
@@ -90,8 +93,33 @@ function save(id,Charge_id){
         console.log(err);
     })
 }
-///function saving perma into 
+///function saving perma into ended//
 
+//route for deleting order when a users cancel a order
+router.post('/cancel_order',verify,(req,res)=>{
+    const userId=token.decodeToken(req.token).user;
+    if(userId){
+        order.findByIdAndDelete({_id:req.body.Order_id}).then(user=>{
+            if(refund(user.Charge_id)){
+                axios.get(`${driver_backend}/services/delete_order/${user._id}`).then(user=>{
+                        res.status(200).json({response:"1"});
+                }).catch(err=>{
+                    console.log(err);
+                    res.status(400).json({response:"0"});
+                })
+            }
+            else
+                res.status(400).json({response:"2"});
+                
+        }).catch(err=>{
+            console.log(err)
+            res.status(400).json({response:"3"});
+        })
+    }
+    else
+        res.status(400).json({response:"4"});
+})
+///route to cancel a order completely//
 
 //route for permanant order route
 router.post('/place_order',verify,(req,res)=>{
