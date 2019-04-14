@@ -16,13 +16,27 @@ router.post('/pay',(req,res)=>{
         amount: req.body.amount,
         source: req.body.stripeTokenId,
         currency: 'usd'
-      }).then(function(res) {
-        save(req.body.order_id);
-        console.log(res);
-      }).catch(function() {
+      }).then(res=>{
+        save(req.body.order_id,res.id);
+        //console.log(res.id)
+        //console.log(res);
+        res.json({msg:"Payment was successful"});
+      }).catch(err=> {
         console.log('Charge Fail')
-        res.send("Your transaction failed..Try again after sometime");
+        res.json({msg:"Your transaction failed..Try again after sometime"});
       })
+})
+
+router.get('/refund/:charge_id',(req,res)=>{
+  stripe.refunds.create({
+    charge:req.params.charge_id
+  }).then(refund=>{
+    console.log(refund)
+    res.status(200).json({response:"1"});
+  }).catch(err=>{
+    console.log(err);
+    res.status(400).json({response:"0"});    
+  })
 })
 
 module.exports={

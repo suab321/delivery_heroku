@@ -56,7 +56,7 @@ router.post('/temp_place_order',verify,(req,res)=>{
 ////route ended//////
 
 //saving from temp to perma///
-function save(id){
+function save(id,Charge_id){
     temp_order.findByIdAndDelete({_id:id}).then(user=>{
         console.log(user);
             const db=new order
@@ -74,6 +74,7 @@ function save(id){
             db.Weight=user.Weight;
             db.Date=user.Date;
             db.Preferred_time=user.Preferred_time;
+            db.Charge_id=Charge_id;
             db.save().then(user=>{
                 perma.findByIdAndUpdate({_id:user.id},{$addToSet:{'History':{"Order_id":user._id}}}).then(res1=>{
                     notify(user);

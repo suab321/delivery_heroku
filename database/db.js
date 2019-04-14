@@ -32,7 +32,8 @@ const Order_schema=new mongoose.Schema({
     CurrentStatus:{type:Number,default:0},
     Weight:String,
     Date:String,
-    Preferred_time:String
+    Preferred_time:String,
+    Charge_id:String
 })
 
 const temp_Order_schema=new mongoose.Schema({
