@@ -2,7 +2,7 @@
 const express=require('express');
 const router=express.Router();
 const jwt=require('jsonwebtoken');
-const {temp,perma,order}=require('../database/db');
+const {temp,perma,order,temp_order}=require('../database/db');
 const {local_link}=require('../urls/links');
 const nodemailer=require('nodemailer');
 const ejs=require('ejs');
@@ -293,17 +293,32 @@ router.get('/user_details',get_token,(req,res)=>{
         res.status(401).json({err:"0"});
 })
 
-//getting user's history
+//getting user's  permanant order history//
 router.get('/order_history',get_token,(req,res)=>{
     const user_id=token.decodeToken(req.token).user;
     if(user_id){
         order.find({User_id:user_id}).then(user=>{
             res.status(200).json(user);
-        }).catch(err=>{console.log("261 err authenticate.js "+err)});
+        }).catch(err=>{res.status(400).json({err:"1"})});
     }
     else
-        res.status(401).json({err:"1"});
+        res.status(401).json({err:"2"});
 })
+//getting order history route ended//
+
+//route for getting temporary orders//
+router.get('/temp_order_history',get_token,(req,res)=>{
+    const user_id=token.decodeToken(req.token).user;
+    if(user_id){
+        temp_order.find({User_id:user_id}).then(user=>{
+            res.status(200).json(user);
+        }).catch(err=>{res.status(400).json({err:"1"})})
+    }
+    else
+        res.status(400).json({err:"2"});
+})
+//route for getting temporary orders ended//
+
 //updating order status when it is completed
 router.post("/order_complete",(req,res)=>{
     order.findByIdAndUpdate({_id:req.body.order_id},{CurrentStatus:2}).then(user=>{
