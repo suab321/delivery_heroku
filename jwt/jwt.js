@@ -12,7 +12,7 @@ function generateToken(data){
     try{
   const token=jwt.sign({user:data},"suab");
     return token;
-    }catch{
+    }catch(err){
         return 0;
     }
 }
