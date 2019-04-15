@@ -249,7 +249,7 @@ router.get('/resetpass/:email',(req,res)=>{
         res.status(200).json({response:"4"});
     })
 })
-//route email sending ended//
+//route email sending ended
 
 
 //link for new password req coming here from frontend ejs
@@ -297,7 +297,7 @@ router.get('/user_details',get_token,(req,res)=>{
 router.get('/order_history',get_token,(req,res)=>{
     const user_id=token.decodeToken(req.token).user;
     if(user_id){
-        order.find({_id:user_id}).then(user=>{
+        order.find({User_id:user_id}).then(user=>{
             res.status(200).json(user);
         }).catch(err=>{console.log("261 err authenticate.js "+user)});
     }
