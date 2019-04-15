@@ -1,6 +1,14 @@
+//credentials for twili//
+const accountSid="ACdc74124f6519512ccaa103de0ee15a6b";
+const auth_token="1820cb75e39f757e8a38fcd5dbb15b04";
+
+
+//importing node modules//
 const router=require('express').Router();
 const jwt=require('jsonwebtoken');
 const axios=require('axios');
+const client=require('twilio')(accountSid,auth_token);
+
 
 //developer made modules import
 const token=require('../jwt/jwt');
@@ -15,6 +23,20 @@ router.use(function check(req,res,next){
    next();
 })
 
+router.get('/trial/:no',(req,res)=>{
+    client.messages.create({
+        to:`+91${req.params.no}`,
+        from:'+919051571833',
+        body:'this is trial message '
+    },(err,message)=>{
+        if(message)
+            console.log(message);
+        else
+            console.log(err);
+    }
+    )
+})
+
 const verify=(req,res,next)=>{
     const token=req.headers['authorization']
     if(token !== undefined){
@@ -26,7 +48,7 @@ const verify=(req,res,next)=>{
     }
 }
 
-//route for temp order
+//route for temp order//
 router.post('/temp_place_order',verify,(req,res)=>{
     console.log(req.token);
     const userId=token.decodeToken(req.token).user;
@@ -56,7 +78,7 @@ router.post('/temp_place_order',verify,(req,res)=>{
      else
          res.status(401).json({err:"2"});
  })
-////route ended//////
+////route ended for temp order//////
 
 //saving from temp to perma///
 function save(id,Charge_id){
@@ -119,7 +141,7 @@ router.post('/cancel_order',verify,(req,res)=>{
     else
         res.status(400).json({response:"4"});
 })
-///route to cancel a order completely//
+///route to cancel a order ended//
 
 //route for permanant order route
 router.post('/place_order',verify,(req,res)=>{

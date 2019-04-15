@@ -33,7 +33,9 @@ const Order_schema=new mongoose.Schema({
     Weight:String,
     Date:String,
     Preferred_time:String,
-    Charge_id:String
+    Charge_id:String,
+    Giver_Otp:String,
+    Recevier_Otp:String
 })
 
 const temp_Order_schema=new mongoose.Schema({

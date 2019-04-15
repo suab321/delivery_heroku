@@ -27,6 +27,7 @@
     "nodemailer": "^5.1.1",
     "nodemon": "^1.18.10",
     "socket.io": "^2.2.0",
-    "stripe": "^6.28.0"
+    "stripe": "^6.28.0",
+    "twilio": "^3.30.1"
   }
 }
