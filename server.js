@@ -81,7 +81,7 @@ app.post('/pay_for_service',verify,(req,res)=>{
     perma.findById({_id:user_id}).then(user=>{
         if(user){
             price.findById({}).then(user=>{
-                res.render('payment',{order:req.body.order,charge:user[0].charge,stripePublicKey:publicKey})
+                res.render('payment',{order:req.body.order,charge:user[0].charge||5,stripePublicKey:publicKey})
             })
         }
         else
