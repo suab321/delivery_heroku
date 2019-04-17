@@ -117,31 +117,26 @@ function save(id,Charge_id){
 }
 ///function saving perma into ended//
 
+
 //route for deleting order when a users cancel a order
-router.post('/cancel_order',verify,(req,res)=>{
-    const userId=token.decodeToken(req.token).user;
-    if(userId){
-        order.findByIdAndDelete({_id:req.body.Order_id}).then(user=>{
-            if(refund(user.Charge_id)){
+function cancel_order(Order_id){
+        order.findByIdAndDelete({_id:Order_id}).then(user=>{
+            const charge_id=user.Charge_id;
                 axios.get(`${driver_backend}/services/delete_order/${user._id}`).then(user=>{
-                        res.status(200).json({response:"1"});
+                        return charge_id;
                 }).catch(err=>{
                     console.log(err);
-                    res.status(400).json({response:"0"});
+                    return 0;
                 })
-            }
-            else
-                res.status(400).json({response:"2"});
                 
         }).catch(err=>{
             console.log(err)
-            res.status(400).json({response:"3"});
+            return 0;
         })
-    }
-    else
-        res.status(400).json({response:"4"});
-})
-///route to cancel a order ended//
+}
+///function to cancel a order ended//
+
+
 
 //route for permanant order route
 router.post('/place_order',verify,(req,res)=>{
@@ -184,7 +179,8 @@ router.post('/place_order',verify,(req,res)=>{
 
 module.exports={
     order_route:router,
-    save
+    save,
+    cancel_order
 }
 
 
