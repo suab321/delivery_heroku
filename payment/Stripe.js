@@ -17,12 +17,11 @@ router.post('/pay',(req,res)=>{
         source: req.body.stripeTokenId,
         currency: 'usd'
       }).then(res=>{
+        console.log("payment successful");
         save(req.body.order_id,res.id);
-        //console.log(res.id)
-        //console.log(res);
-        res.json({msg:"Payment was successful"});
+        //res.json({msg:"Payment was successful"});
       }).catch(err=> {
-        console.log('Charge Fail')
+        console.log(err)
         res.json({msg:"Your transaction failed..Try again after sometime"});
       })
 })
