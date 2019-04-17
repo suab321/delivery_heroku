@@ -18,7 +18,7 @@ var stripeHandler=StripeCheckout.configure({
             })
         }).then(res=>{
             // res.render('abhi.html');
-            alert("order has been placed");
+            return alert("order has been placed");
         }).then(data=>{
            alert(`${data.msg}`);
         })

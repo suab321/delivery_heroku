@@ -306,6 +306,7 @@ router.get('/order_history',get_token,(req,res)=>{
 })
 //getting order history route ended//
 
+
 //route for getting temporary orders//
 router.get('/temp_order_history',get_token,(req,res)=>{
     const user_id=token.decodeToken(req.token).user;
@@ -318,6 +319,8 @@ router.get('/temp_order_history',get_token,(req,res)=>{
         res.status(400).json({err:"2"});
 })
 //route for getting temporary orders ended//
+
+
 
 //updating order status when it is completed
 router.post("/order_complete",(req,res)=>{
