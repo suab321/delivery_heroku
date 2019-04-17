@@ -6,7 +6,8 @@ const publicKey="pk_test_mNSmGjYqswUKp1NnrGGuNk8f004q3h4DWh";
 const stripe=require('stripe')(secretKey);
 
 const {save,cancel_order}=require("../placing_order/order");
-const {emit_transaction_complete}=require('../sockets/socket_fucn')
+const {emit_transaction_complete}=require('../sockets/socket_fucn');
+const {decodeToken}=require('../jwt/jwt')
 
 
 
@@ -39,6 +40,8 @@ router.post('/pay',(req,res)=>{
 
 //route for cancelling order//
 router.post('/cancel_order',verify,(req,res)=>{
+  const id=decodeToken(req.token).user;
+  if(id){
   const charge_id=cancel_order(req.body.Order_id);
   if(charge_id){
     stripe.refunds.create({
@@ -53,7 +56,11 @@ router.post('/cancel_order',verify,(req,res)=>{
   }
   else
     res.status(400).json({response:"2"});
+}
+else
+  res.status(400).json({response:"3"});
 })
+
 //route for cancelling order ended//
   
 
