@@ -2,11 +2,13 @@ const socket=require('socket.io');
 
 const {order,perma}=require('../database/db');
 const authentication=require('../authentication/authenticate');
+const router=require('express').Router();
 
 var io;
 var connected_socket;
-
+var users=[{user_id:"",socket_id:""}];
 function connection(port){
+    // users=[{users_id:"",socket_id:""}];
     io=socket(port);
     io.on('connection',socket=>{
         connected_socket=socket;
@@ -15,6 +17,19 @@ function connection(port){
             //console.log(req)
             io.sockets.emit("new_delivery_request",req);
         });
+        connected_socket.on("new_join",function(data){
+            var new_user={user:data.user_id,socket_id:connected_socket.id};
+            users.push(new_user);
+        });
+        connected_socket.on("disconnect",function(){
+            var new_user=users.filter(i=>{
+                if(i.socket_id !== connected_socket.id)
+                    return i;
+            });
+            console.log(new_user);
+            users=new_user;
+            console.log(users);
+        })
         connected_socket.on("request_accepted_bydriver",(data)=>{
             console.log("19 socket_fucn"+data);
             console.log(data);
@@ -39,6 +54,10 @@ function connection(port){
 function emit_order(data){
     io.sockets.emit('new_delivery_request',data);
 }
+
+router.get('/connected_users_list',(req,res)=>{
+    res.status(200).json(users);
+})
 
 
 
