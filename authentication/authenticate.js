@@ -37,13 +37,13 @@ const transporter= nodemailer.createTransport({
 
 
 //services outside this authentication
-const sendOTP=(email,number)=>{
+const sendOTP=(email,number,who)=>{
+    if(who){
     const mailoption={
         from:"stowawaysuab123@gmail.com",
         to:email,
         subject:"Delivery Confirmation OTP",
-        text:"This is your OTP enter this in your drivers phone to confirm order.To do not share it any body",
-        html:`<h3>${number}</h3>`
+        html:`<p>Dear Customar</p><br><p>Thank you for orddering from Stowaway</p><p>This is the OTP you would share with your driver</p><p>to start the Trip</p><br><h3>${number}</h3><br><p>*Do not share the OTP with anyone</p>`
     }
     transporter.sendMail(mailoption,(err,res)=>{
         if(err)
@@ -51,6 +51,21 @@ const sendOTP=(email,number)=>{
         else
             console.log(res);
     })
+  }
+  else{
+    const mailoption={
+        from:"stowawaysuab123@gmail.com",
+        to:email,
+        subject:"Delivery Confirmation OTP",
+        html:`<p>Dear Customar</p><br><p>Thank you for orddering from Stowaway</p><p>This is the OTP you would share with your service provider</p><p>when they come to deliver the package</p><p>to deliver the package.</p><p>Without this OTP you wouldn't be able</p><p>to complete the delvery.</p><br><h3>${number}</h3><br><p>*Do not share the OTP with anyone</p>`
+    }
+    transporter.sendMail(mailoption,(err,res)=>{
+        if(err)
+            console.log(err);
+        else
+            console.log(res);
+    })
+  }
 }
 
 

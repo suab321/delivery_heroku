@@ -42,8 +42,8 @@ function connection(port){
                 else if(err)
                     console.log("26 socket_fucn"+err);
             })
-            authentication.sendOTP(data.Recevier_Email,data.recevier_unique);
-            authentication.sendOTP(data.Giver_Email,data.sender_unique);
+            authentication.sendOTP(data.Recevier_Email,data.recevier_unique,0);
+            authentication.sendOTP(data.Giver_Email,data.sender_unique,1);
         });
         
         connected_socket.on("user_from_user_frontend",data=>{
