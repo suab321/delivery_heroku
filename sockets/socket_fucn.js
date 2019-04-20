@@ -59,13 +59,14 @@ router.get('/connected_users_list',(req,res)=>{
     res.status(200).json(users);
 })
 
-router.get('/order_accepted',(req,res)=>{
+router.post('/order_accepted',(req,res)=>{
     console.log("19 socket_fucn"+req.body);
     console.log(req.body.data);
     perma.update({_id:req.body.data.User_id,'History.Order_id':req.body.data._id},
     {$set:{'History.$.CurrentStatus':1}},{new:true},(err,result)=>{
         if(result){
             order.findByIdAndUpdate({_id:req.body.data.Order_id},{CurrentStatus:1,Driver_id:req.body.data.Driver_id,Giver_Otp:req.body.sender_unique,Recevier_Otp:req.body.recevier_unique}).then(user=>{
+                res.status(200).json(user)
             }).catch(err=>console.log("26 socket_fucn"+err))
         }
         else if(err)
