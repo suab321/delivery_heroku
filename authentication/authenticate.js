@@ -42,7 +42,7 @@ const sendOTP=(email,number,who)=>{
     const mailoption={
         from:"stowawaysuab123@gmail.com",
         to:email,
-        subject:"Delivery Confirmation OTP",
+        subject:"Stowaway Start your Delivery process By giving this OTP to pickup Driver",
         html:`<p>Dear Customar</p><br><p>Thank you for orddering from Stowaway</p><p>This is the OTP you would share with your driver</p><p>to start the Trip</p><br><h3>${number}</h3><br><p>*Do not share the OTP with anyone</p>`
     }
     transporter.sendMail(mailoption,(err,res)=>{
@@ -56,7 +56,7 @@ const sendOTP=(email,number,who)=>{
     const mailoption={
         from:"stowawaysuab123@gmail.com",
         to:email,
-        subject:"Delivery Confirmation OTP",
+        subject:"Stowaway Recevie your Order by this otp to Driver",
         html:`<p>Dear Customar</p><br><p>Thank you for orddering from Stowaway</p><p>This is the OTP you would share with your service provider</p><p>when they come to deliver the package</p><p>to deliver the package.</p><p>Without this OTP you wouldn't be able</p><p>to complete the delvery.</p><br><h3>${number}</h3><br><p>*Do not share the OTP with anyone</p>`
     }
     transporter.sendMail(mailoption,(err,res)=>{

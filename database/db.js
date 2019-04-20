@@ -18,6 +18,9 @@ const Price_Schema=new mongoose.Schema({
 
 const Order_schema=new mongoose.Schema({
     User_id:{type:String,required:true},
+    Driver_Name:String,
+    Driver_Phone:String,
+    Driver_Email:String,
     Driver_id:String,
     Commodity:String,
     Receving_Address:String,

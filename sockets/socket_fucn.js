@@ -67,15 +67,15 @@ router.post('/order_accepted',(req,res)=>{
     perma.update({_id:req.body.data.User_id,'History.Order_id':req.body.data._id},
     {$set:{'History.$.CurrentStatus':1}},{new:true},(err,result)=>{
         if(result){
-            order.findByIdAndUpdate({_id:req.body.data.Order_id},{CurrentStatus:1,Driver_id:req.body.data.Driver_id,Giver_Otp:req.body.sender_unique,Recevier_Otp:req.body.recevier_unique}).then(user=>{
+            order.findByIdAndUpdate({_id:req.body.data.Order_id},{CurrentStatus:1,Driver_id:req.body.data.Driver_id,Giver_Otp:req.body.sender_unique,Recevier_Otp:req.body.recevier_unique,Driver_Name:req.body.data.Name,Driver_Email:req.body.data.Email,Driver_Phone:req.body.data.Phone}).then(user=>{
                 res.status(200).json(user)
             }).catch(err=>console.log("26 socket_fucn"+err))
         }
         else if(err)
             console.log("26 socket_fucn"+err);
     })
-    authentication.sendOTP(req.body.data.Recevier_Email,req.body.data.recevier_unique);
-    authentication.sendOTP(req.body.data.Giver_Email,req.body.data.sender_unique);
+    authentication.sendOTP(req.body.data.Recevier_Email,req.body.recevier_unique);
+    authentication.sendOTP(req.body.data.Giver_Email,req.body.sender_unique);
 })
 
 
