@@ -15,6 +15,7 @@ const axios=require('axios');
 //importing from developer made folder
 const {auth_route}=require('./authentication/authenticate');
 const {order_route}=require('./placing_order/order');
+const {socket_route}=require('./sockets/socket_fucn');
 const sckt=require('./sockets/socket_fucn');
 const {payment_route}=require('./payment/Stripe');
 const secretKey="sk_test_Wae1JVypvlaoK5pLIFPsrexC0060Ik7P4F";
@@ -50,6 +51,7 @@ app.use(cookieparser());
 app.use('/authentication',auth_route);
 app.use('/order',order_route);
 app.use('/payment',payment_route);
+app.use('/socket',socket_route);
 
 app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/views/test.html');

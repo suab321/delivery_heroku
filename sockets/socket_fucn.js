@@ -63,5 +63,6 @@ router.get('/connected_users_list',(req,res)=>{
 
 module.exports={
     connection,
-    emit_order
+    emit_order,
+    socket_route:router
 }

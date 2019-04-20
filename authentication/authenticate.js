@@ -297,8 +297,15 @@ router.get('/user_details',get_token,(req,res)=>{
 router.get('/order_history',get_token,(req,res)=>{
     const user_id=token.decodeToken(req.token).user;
     if(user_id){
+        var perma_orders=[];
+        var temp_orders=[];
         order.find({User_id:user_id}).then(user=>{
-            res.status(200).json(user);
+            perma_orders=user;
+        temp_order.find({User_id:user_id}).then(user=>{
+            temp_orders=user;
+            var orders=perma_orders.concat(temp_orders);
+            res.status(200).json(orders);
+        })
         }).catch(err=>{res.status(400).json({err:"1"})});
     }
     else
