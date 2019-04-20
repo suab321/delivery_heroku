@@ -62,6 +62,8 @@ router.get('/connected_users_list',(req,res)=>{
 router.post('/order_accepted',(req,res)=>{
     console.log("19 socket_fucn"+req.body);
     console.log(req.body.data);
+    console.log(req.body.sender_unique);
+    console.log(req.body.recevier_unique);
     perma.update({_id:req.body.data.User_id,'History.Order_id':req.body.data._id},
     {$set:{'History.$.CurrentStatus':1}},{new:true},(err,result)=>{
         if(result){
