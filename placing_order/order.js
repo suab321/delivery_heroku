@@ -67,8 +67,12 @@ router.post('/temp_place_order',verify,(req,res)=>{
              db.Recevier_Email=req.body.Recevier_Email;
              db.Price=req.body.Price;
              db.Weight=req.body.Weight;
+             db.Height=req.body.Height;
+             db.Width=req.body.Width;
+             db.Length=req.body.Length;
+             db.Landmark=req.body.Landmark;
+             db.Pickup_Date=req.body.Pickup_Date;
              db.Date=new Date();
-             db.Preferred_time=req.body.time;
              db.save().then(user=>{
                 res.status(200).json({user,response:"1"});
              }).catch(err=>{
@@ -98,7 +102,11 @@ function save(id,Charge_id){
             db.Price=user.Price;
             db.Weight=user.Weight;
             db.Date=user.Date;
-            db.Preferred_time=user.Preferred_time;
+            db.Length=user.Length;
+            db.Width=user.Width;
+            db.Height=user.Height;
+            db.Landmark=user.Landmark;
+            db.Pickup_Date=user.Pickup_Date;
             db.Charge_id=Charge_id;
             db.save().then(user=>{
                 perma.findByIdAndUpdate({_id:user.id},{$addToSet:{'History':{"Order_id":user._id}}}).then(res1=>{

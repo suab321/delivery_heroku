@@ -15,7 +15,7 @@ function notify(order){
                     to:i.device_id,
                     notification:{
                         title:"Stowaway",
-                        body:`name is ${order.Giver_Name} Pickup-Address is ${order.Receving_Address} Delivery-Address is ${order.Delivery_Address}`
+                        body:`name is ${order.Giver_Name} Pickup-Address is ${order.Receving_Address} Delivery-Address is ${order.Delivery_Address} Pick-up Date is${order.Pickup_Date}`
                     }
                 }
                 fcm.send(message,(err,response)=>{

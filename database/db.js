@@ -34,11 +34,15 @@ const Order_schema=new mongoose.Schema({
     Price:String,
     CurrentStatus:{type:Number,default:0},
     Weight:String,
+    Length:String,
+    Width:String,
+    Height:String,
     Date:String,
-    Preferred_time:String,
     Charge_id:String,
     Giver_Otp:String,
-    Recevier_Otp:String
+    Recevier_Otp:String,
+    Pickup_Date:String,
+    Landmark:String,
 })
 
 const temp_Order_schema=new mongoose.Schema({
@@ -56,8 +60,12 @@ const temp_Order_schema=new mongoose.Schema({
     Price:String,
     CurrentStatus:{type:Number,default:0},
     Weight:String,
+    Length:String,
+    Width:String,
+    Height:String,
     Date:String,
-    Preferred_time:String
+    Pickup_Date:String,
+    Landmark:String,
 })
 
 

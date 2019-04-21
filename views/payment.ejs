@@ -5,7 +5,7 @@
             var order_id='<%=order_id%>'
             var stripekey='<%= stripePublicKey%>';
             var charge='<%= charge %>';
-            var amount=weight*charge;
+            var amount=weight*charge*height*length*width;
         </script>
         <script src="pay.js" defer></script>
     
