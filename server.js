@@ -67,13 +67,23 @@ const verify=(req,res,next)=>{
         res.status(401).json({response:'0'})
 }
 
-app.get('/pay_for_service1',(req,res)=>{
-    console.log(req.query);
+app.get('/payment/complete',verify,(req,res)=>{
+    res.render('order_complete');
+})
+
+app.get('/pay_for_service1',verify,(req,res)=>{
+    const user_id=decodeToken(req.token).user;
+    perma.findById({_id:user_id}).then(user=>{
+        console.log(req.query);
             price.find({}).then(user=>{
                 res.render('payment',{order_id:req.query.order_id,weight:req.query.weight,charge:25,stripePublicKey:publicKey,height:req.query.height,length:req.query.length,width:req.query.width})
             }).catch(err=>{
                 console.log(err)
             })
+    }).catch(err=>{
+        res.status(400).json({response:"Not Allowed to use this route",response:"2"});
+    })
+    
 })
 
 //route for payment
