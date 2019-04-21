@@ -52,7 +52,7 @@ function connection(port){
     })
 }
 function emit_order(data){
-    console.log(data);
+    console.log("55 socket_func.js"+data);
     io.sockets.emit('new_delivery_request',data);
 }
 
