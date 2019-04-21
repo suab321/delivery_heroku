@@ -70,7 +70,7 @@ const verify=(req,res,next)=>{
 app.get('/pay_for_service1',(req,res)=>{
     console.log(req.query);
             price.find({}).then(user=>{
-                res.render('payment',{order_id:req.query.order_id,weight:req.query.weight,charge:25,stripePublicKey:publicKey,height:req.query.height,length:req.query.length,width:req.query.width})
+                res.render('payment',{order_id:req.query.order_id,weight:req.query.weight,charge:5,stripePublicKey:publicKey,height:req.query.height,length:req.query.length,width:req.query.width})
             }).catch(err=>{
                 console.log(err)
             })
