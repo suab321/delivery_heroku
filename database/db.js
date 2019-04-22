@@ -58,7 +58,7 @@ const temp_Order_schema=new mongoose.Schema({
     Recevier_Name:String,
     Recevier_Email:String,
     Price:String,
-    CurrentStatus:{type:Number,default:0},
+    CurrentStatus:{type:Number,default:-1},
     Weight:String,
     Length:String,
     Width:String,
