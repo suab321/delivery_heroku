@@ -355,6 +355,15 @@ router.get("/order_status_update/:Order_id/:status",(req,res)=>{
     })
 })
 
+//route to get orders which are not accepted by driver//
+router.get('/pending_order',(req,res)=>{
+    order.find({CurrentStatus:0}).then(user=>{
+        res.status(200).json(user);
+    }).catch(err=>{
+        console.log(err);
+    })
+})
+
 
 module.exports={
     auth_route:router,
