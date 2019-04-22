@@ -43,7 +43,7 @@ const sendOTP=(email,number,who)=>{
         from:"stowawaysuab123@gmail.com",
         to:email,
         subject:"Stowaway:Start your trip with this OTP",
-        html:`<p>Dear Customar</p><br><h5>Thank you for orddering from Stowaway</h5><h5>This is the OTP you would share with your driver to start the Trip</h5><br><h3>${number}</h3><br><h5>*Do not share the OTP with anyone</h5>`
+        html:`<p>Dear Customar</p><br><p>Thank you for orddering from Stowaway This is the OTP you would share with your driver to start the Trip <h3>${number}</h3> *Do not share the OTP with anyone</p>`
     }
     transporter.sendMail(mailoption,(err,res)=>{
         if(err)
@@ -57,7 +57,7 @@ const sendOTP=(email,number,who)=>{
         from:"stowawaysuab123@gmail.com",
         to:email,
         subject:"Stowaway:Recevie your package with this OTP",
-        html:`<p>Dear Customar</p><br><h5>Thank you for orddering from Stowaway</h5><h5>This is the OTP you would share with your service provider</h5><h5>when they come to deliver the package</h5><h5>to deliver the package.</h5><h5>Without this OTP you wouldn't be able</h5><h5>to complete the delvery.</h5><br><h3>${number}</h3><br><h5>*Do not share the OTP with anyone</h5>`
+        html:`<p>Dear Customar</p><br><p>Thank you for orddering from Stowaway This is the OTP you would share with your service provider when they come to deliver the package to deliver the package.Without this OTP you wouldn't be able to complete the delvery.<h3>${number}</h3>*Do not share the OTP with anyone</p>`
     }
     transporter.sendMail(mailoption,(err,res)=>{
         if(err)
@@ -76,7 +76,7 @@ const verfiy=(email,token)=>{
         to:email,
         subject:"Activate your Stowaway Account by verifying this link",
         text:"Click the below link for verification",
-        html:'<p>To activate your Stowaway account,please click on the following link or copy and paste the url into your browser window:</p><br><a href="https://floating-brushlands-52313.herokuapp.com/authentication/verification/'+token+'">'+token+'</a><br><p>After you activate your account,you will be able to access your account in the Stowaway Application and enjoy the experience first hand!</p>'
+        html:'<p>To activate your Stowaway account,please click on the following link or copy and paste the url into your browser window:<a href="https://floating-brushlands-52313.herokuapp.com/authentication/verification/'+token+'">'+token+'</a> After you activate your account,you will be able to access your account in the Stowaway Application and enjoy the experience first hand!</p>'
     }
 
     transporter.sendMail(mailoption,(err,res)=>{
@@ -96,7 +96,7 @@ const resetpass=(email,token)=>{
         to:email,
         subject:"Reset your Stowaway account password by verifying this link",
         text:"Click the link for restting password",
-        html:'<p>To reset your Stowaway Account please click on the following link or copy and paste the URL into yourbrowser window</p><br><a href="https://floating-brushlands-52313.herokuapp.com/authentication/reseting/'+token+'">'+token+'</a><br><p>After you change the accounts password you will be able to change your password and log in to your account</p>'
+        html:'<p>To reset your Stowaway Account please click on the following link or copy and paste the URL into yourbrowser window <a href="https://floating-brushlands-52313.herokuapp.com/authentication/reseting/'+token+'">'+token+'</a> After you change the accounts password you will be able to change your password and log in to your account</p>'
     }
 
     transporter.sendMail(mailoption,(err,res)=>{
