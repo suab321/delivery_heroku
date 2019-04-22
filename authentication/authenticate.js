@@ -346,7 +346,7 @@ router.get('/temp_order_history',get_token,(req,res)=>{
 
 
 //updating order status when it is completed
-router.get("/order_status_update/Order_id/status",(req,res)=>{
+router.get("/order_status_update/:Order_id/:status",(req,res)=>{
     order.findByIdAndUpdate({_id:req.params.Order_id},{CurrentStatus:req.params.status}).then(user=>{
         if(user)
             res.status(200).json("Updated");
