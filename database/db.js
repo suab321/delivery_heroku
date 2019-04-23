@@ -43,6 +43,7 @@ const Order_schema=new mongoose.Schema({
     Recevier_Otp:String,
     Pickup_Date:String,
     Landmark:String,
+    Order_stamp:String
 })
 
 const temp_Order_schema=new mongoose.Schema({
