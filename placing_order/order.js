@@ -85,7 +85,7 @@ router.post('/temp_place_order',verify,(req,res)=>{
 ////route ended for temp order//////
 
 //saving from temp to perma///
-function save(id,Charge_id){
+function save(id,Charge_id,Price){
     temp_order.findByIdAndDelete({_id:id}).then(user=>{
         console.log(user);
             const db=new order
@@ -99,7 +99,7 @@ function save(id,Charge_id){
             db.Recevier_Phone=user.Recevier_Phone;
             db.Recevier_Name=user.Recevier_Name;
             db.Recevier_Email=user.Recevier_Email;
-            db.Price=user.Price;
+            db.Price=Price;
             db.Weight=user.Weight;
             db.Date=user.Date;
             db.Length=user.Length;

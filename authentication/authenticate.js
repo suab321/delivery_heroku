@@ -363,6 +363,22 @@ router.get('/pending_order',(req,res)=>{
         console.log(err);
     })
 })
+//route ended//
+
+//route to get query paramneter result//
+router.get('/get_order_parameter',get_token,(req,res)=>{
+    const userId=token.decodeToken(req.token).user;
+    if(userId){
+    perma.findById({_id:userId}).then(user=>{
+        res.status(200).json({height:req.query.height,weight:req.query.weight,length:req.query.length,width:req.query.width});
+    }).catch(err=>{
+        res.status(400).json({msg:"You are not a valid user",reponse:"1"});
+    })
+}
+else
+    res.status(400).json({msg:"You are not authenticated",response:"2"});
+})
+//route ended//
 
 
 module.exports={

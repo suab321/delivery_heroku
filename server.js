@@ -87,24 +87,10 @@ app.get('/pay_for_service1',verify,(req,res)=>{
 })
 
 //route for payment
-app.post('/pay_for_service',verify,(req,res)=>{
-    const user_id=decodeToken(req.token).user;
-    if(user_id){
-    perma.findById({_id:user_id}).then(user=>{
-        if(user){
-            price.findById({}).then(user=>{
-                res.render('payment',{order:req.body.order,charge:5,stripePublicKey:publicKey})
-            })
-        }
-        else
-            res.status(401).json({response:'1'})
-    })
-    }
-    else{
-        res.status(401).json({response:'2'});
-    }
-    
-})
+// app.get('/pay_for_service',(req,res)=>{
+//                 res.render('payment',{order_id:req.query.order_id,weight:req.query.weight,charge:25,stripePublicKey:publicKey,height:req.query.height,length:req.query.length,width:req.query.width})
+
+// })
 //route payment
 
 const port_connection=app.listen(process.env.PORT || 3002);

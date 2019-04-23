@@ -29,7 +29,8 @@ router.post('/pay',(req,res)=>{
         source: req.body.stripeTokenId,
         currency: 'usd'
       }).then(res=>{
-        save(req.body.order_id,res.id);
+        console.log(res);
+        save(req.body.order_id,res.id,req.body.amount);
         console.log("payment was successful")
       }).catch(err=> {
         console.log(err)
