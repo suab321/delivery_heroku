@@ -63,8 +63,23 @@ else
 })
 
 //route for cancelling order ended//
-  
+
+
+//function to get charge details//
+function charge_detail(id){
+  stripe.charges.retrieve(
+    `${id}`,
+    function(err,detail){
+      if(err)
+        return 0;
+      else  
+        return detail;
+    }
+  )
+}
+//function ended///
 
 module.exports={
     payment_route:router,
+    charge_detail
 }

@@ -13,7 +13,7 @@ mongoose.connect(mongourl,{useNewUrlParser:true},(err,db)=>{
 })
 
 const Price_Schema=new mongoose.Schema({
-    charge:String
+    Charge_id:String
 })
 
 const Order_schema=new mongoose.Schema({

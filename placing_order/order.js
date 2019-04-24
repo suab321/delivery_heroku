@@ -12,7 +12,7 @@ const client=require('twilio')(accountSid,auth_token);
 
 //developer made modules import
 const token=require('../jwt/jwt');
-const {order,perma,temp_order}=require('../database/db');
+const {order,perma,temp_order,price}=require('../database/db');
 const {emit_order}=require('../sockets/socket_fucn');
 const {notify}=require('../fcm/Notify');
 // const {refund}=require('../payment/Stripe');
@@ -86,6 +86,13 @@ router.post('/temp_place_order',verify,(req,res)=>{
 
 //saving from temp to perma///
 function save(id,Charge_id,Price){
+    const db=new price;
+    db.Charge_id=Charge_id;
+    db.save(then=>{
+        console.log(user);
+    }).catch(err=>{
+        console.log(err);
+    })
     temp_order.findByIdAndDelete({_id:id}).then(user=>{
         console.log(user);
             const db=new order

@@ -1,7 +1,9 @@
 const router=require('express').Router();
 
 //importing other things from other folders///
-const {perma,temp_order,price,order,temp}=require('../database/db');
+const {perma,temp_order,price,order,temp,price}=require('../database/db');
+const {charge_detail}=require('../payment/Stripe')
+//ended///
 
 //route to get unpaid orders///
 router.get('/get_pending_orders',(req,res)=>{
@@ -40,6 +42,27 @@ router.get('/get_orders',(req,res)=>{
     }).catch(err=>{
         res.status(400).json(err);
     })
+})
+//route ended///
+
+
+//route to get all charges//
+router.get('/get_chargeId',(req,res)=>{
+    price.find({}).then(user=>{
+        res.status(200).json(user);
+    }).catch(err=>{
+        console.log(err);
+    })
+})
+//route ended///
+
+//route to get details about charge//
+router.get('/get_charge_detail',(req,res)=>{
+    const detail=charge_detail(req.body.Charge_id);
+    if(detail)
+        res.status(200).json(detail);
+    else
+        res.status(400).json({msg:"error fetching details",response:"1"});
 })
 //route ended///
 
