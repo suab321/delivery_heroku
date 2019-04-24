@@ -382,7 +382,7 @@ else
 //route ended//
 
 //route to get user_details when _id is given//
-router.get('/get_user',(req,res)=>{
+router.post('/get_user',(req,res)=>{
     perma.findById({_id:req.body.id}).then(user=>{
         res.status(200).json(user);
     }).catch(err=>{
