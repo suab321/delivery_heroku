@@ -4,9 +4,11 @@ var fcm = new FCM(serverkey);
 
 const axios=require('axios');
 
+const {driver_backend}=require('../urls/links')
+
 function notify(order){
 
-    axios.get(`https://fast-reef-53121.herokuapp.com/authentication/get_driver`).then(res=>{
+    axios.get(`${driver_backend}/authentication/get_driver`).then(res=>{
         if(res.status === 200){
             console.log(res.data)
             var users=res.data;
