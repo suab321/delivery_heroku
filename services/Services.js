@@ -1,7 +1,7 @@
 const router=require('express').Router();
 
 //importing other things from other folders///
-const {perma,temp_order,price,order,temp,price}=require('../database/db');
+const {perma,temp_order,order,temp,price}=require('../database/db');
 const {charge_detail}=require('../payment/Stripe')
 //ended///
 
