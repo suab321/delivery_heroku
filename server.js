@@ -22,6 +22,7 @@ const secretKey="sk_test_Wae1JVypvlaoK5pLIFPsrexC0060Ik7P4F";
 const publicKey="pk_test_mNSmGjYqswUKp1NnrGGuNk8f004q3h4DWh";
 const {price,perma}=require('./database/db');
 const {decodeToken}=require('./jwt/jwt');
+const {service_route}=require('./services/Services');
 
 
 //mongoose connection
@@ -47,11 +48,13 @@ app.use(session({
 }))
 app.use(cookieparser());
 
-
+//importing router for assigning routes//
 app.use('/authentication',auth_route);
 app.use('/order',order_route);
 app.use('/payment',payment_route);
 app.use('/socket',socket_route);
+app.use('/services',service_route);
+//ended//
 
 app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/views/test.html');
