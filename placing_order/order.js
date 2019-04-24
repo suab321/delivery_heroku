@@ -88,11 +88,9 @@ router.post('/temp_place_order',verify,(req,res)=>{
 function save(id,Charge_id,Price){
     const db=new price;
     db.Charge_id=Charge_id;
-    db.save(then=>{
+    db.save().then(user=>{
         console.log(user);
-    }).catch(err=>{
-        console.log(err);
-    })
+    }).catch(err=>{console.log(err)});
     temp_order.findByIdAndDelete({_id:id}).then(user=>{
         console.log(user);
             const db=new order
