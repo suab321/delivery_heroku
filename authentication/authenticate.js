@@ -76,7 +76,7 @@ const verfiy=(email,token)=>{
         to:email,
         subject:"Activate your Stowaway Account by verifying this link",
         text:"Click the below link for verification",
-        html:'<p>To activate your Stowaway account,please click on the following link or copy and paste the url into your browser window:<a href="https://floating-brushlands-52313.herokuapp.com/authentication/verification/'+token+'">'+token+'</a> After you activate your account,you will be able to access your account in the Stowaway Application and enjoy the experience first hand!</p>'
+        html:'<p>Welcome to stowaway.</p><br><p>Please click on the following link or copy and paste the libk to confirm your registration:<a href="https://floating-brushlands-52313.herokuapp.com/authentication/verification/'+token+'">'+token+'</a></p><p>From,<br>Team Stowaway</p>'
     }
 
     transporter.sendMail(mailoption,(err,res)=>{
@@ -371,7 +371,8 @@ router.get('/get_order_parameter',get_token,(req,res)=>{
     const userId=token.decodeToken(req.token).user;
     if(userId){
     perma.findById({_id:userId}).then(user=>{
-        res.status(200).json({height:req.query.height,weight:req.query.weight,length:req.query.length,width:req.query.width});
+        const price=req.query.height*req.query.width*req.query.length*req.query.weight*0.01*25;
+        res.status(200).json({price:`${price}`});
     }).catch(err=>{
         res.status(400).json({msg:"You are not a valid user",reponse:"1"});
     })
