@@ -70,8 +70,10 @@ function charge_detail(id){
   stripe.charges.retrieve(
     `${id}`,
     function(err,detail){
-      if(err)
+      if(err){
+        console.log(err);
         return 0;
+      }
       else  
         return detail;
     }
