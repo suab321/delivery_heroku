@@ -59,7 +59,7 @@ router.get('/get_chargeId',(req,res)=>{
 //route to get details about charge//
 router.post('/get_charge_detail',(req,res)=>{
     var detail=new Promise((resolve,reject)=>{
-        charge_detail(req.body.Charge_id);
+        resolve(charge_detail(req.body.Charge_id));
     }); 
     console.log(detail);
     if(detail)
