@@ -59,6 +59,7 @@ router.get('/get_chargeId',(req,res)=>{
 //route to get details about charge//
 router.post('/get_charge_detail',(req,res)=>{
     const detail=charge_detail(req.body.Charge_id);
+    console.log(detail);
     if(detail)
         res.status(200).json(detail);
     else

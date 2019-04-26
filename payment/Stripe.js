@@ -71,10 +71,7 @@ function charge_detail(id){
   stripe.charges.retrieve(
     `${id}`,
     function(err,detail){
-      console.log(err);
-      console.log(detail);
       if(err){
-        console.log(err);
         return 0;
       }
       else  
