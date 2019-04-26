@@ -67,6 +67,7 @@ else
 
 //function to get charge details//
 function charge_detail(id){
+  console.log(id);
   stripe.charges.retrieve(
     `${id}`,
     function(err,detail){
