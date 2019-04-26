@@ -17,11 +17,7 @@ var stripeHandler=StripeCheckout.configure({
                 amount:amount
             })
         }).then(res=>{
-            console.log(res)
-            fetch('/payment/complete',{
-                method:"GET"
-            })
-            //return alert("order has been placed");
+            alert(`${data.msg}`);
         }).then(data=>{
            alert(`${data.msg}`);
         })

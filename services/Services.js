@@ -57,7 +57,7 @@ router.get('/get_chargeId',(req,res)=>{
 //route ended///
 
 //route to get details about charge//
-router.get('/get_charge_detail',(req,res)=>{
+router.post('/get_charge_detail',(req,res)=>{
     const detail=charge_detail(req.body.Charge_id);
     if(detail)
         res.status(200).json(detail);
@@ -65,6 +65,8 @@ router.get('/get_charge_detail',(req,res)=>{
         res.status(400).json({msg:"error fetching details",response:"1"});
 })
 //route ended///
+
+//route to get charge details
 
 module.exports={
     service_route:router
