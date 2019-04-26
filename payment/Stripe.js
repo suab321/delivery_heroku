@@ -66,21 +66,22 @@ else
 
 
 //function to get charge details//
-function charge_detail(id){
-  console.log(id);
+router.post('/get_charge_detail',(req,res)=>{
+  console.log(req.body.Charge_id);
   stripe.charges.retrieve(
-    `${id}`,
+    `${req.body.Charge_id}`,
     function(err,detail){
       if(err)
-        return 0;
+        res.status(400).json({msg:"error from stripe end",response:"1"});
       else  
-        return detail;
+        res.status(200).json(detail)
     }
   )
-}
+})
+  
+
 //function ended///
 
 module.exports={
     payment_route:router,
-    charge_detail
 }
