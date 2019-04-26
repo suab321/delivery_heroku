@@ -59,7 +59,7 @@ router.get('/get_chargeId',(req,res)=>{
 //route to get details about charge//
 router.post('/get_charge_detail',(req,res)=>{
     var object=1;
-    const object=charge_detail(req.body.Charge_id);
+    object=charge_detail(req.body.Charge_id);
     console.log(object)
     if(object)
         res.status(200).json(object);
