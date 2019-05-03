@@ -68,7 +68,18 @@ router.post('/get_charge_detail',(req,res)=>{
 })
 //route ended///
 
-//route to get charge details
+//route to check if user exist with this email address//
+router.get('/search_email/:email',(req,res)=>{
+    perma.findOne({Email:req.params.email}).then(user=>{
+        if(user)
+            res.status(200).json({msg:"yes"});
+        else
+            res.status(400).json({msg:"cant find"});
+    }).catch(err=>{
+        res.status(400).json({msg:"cant find"})
+    })
+})
+//route ended
 
 module.exports={
     service_route:router

@@ -3,9 +3,10 @@ const express=require('express');
 const router=express.Router();
 const jwt=require('jsonwebtoken');
 const {temp,perma,order,temp_order}=require('../database/db');
-const {local_link}=require('../urls/links');
+const {local_link,driver_backend}=require('../urls/links');
 const nodemailer=require('nodemailer');
 const ejs=require('ejs');
+const axios=require('axios');
 
 //developer made function import
 const token=require('../jwt/jwt');
@@ -107,10 +108,18 @@ const resetpass=(email,token)=>{
     })
 }
 
-
+//to check that the user is not present on driver side//
+const check=(req,res,next)=>{
+    axios.get(`${driver_backend}/services/search_email/${req.body.Email}`).then(user=>{
+        next();
+    }).catch(err=>{
+        res.status(400).json({msg:"User already exist in driver account",response:"5"});
+    })
+}
+//functio ends//
 
 //registering user route
-router.post('/register',(req,res)=>{
+router.post('/register',check,(req,res)=>{
     perma.findOne({Email:req.body.Email}).then(user=>{
         if(user){
         res.status(200).json({response:"1"});
