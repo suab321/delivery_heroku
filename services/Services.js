@@ -72,11 +72,11 @@ router.post('/get_charge_detail',(req,res)=>{
 router.get('/search_email/:email',(req,res)=>{
     perma.findOne({Email:req.params.email}).then(user=>{
         if(user)
-            res.status(200).json({msg:"yes"});
+            res.status(400).json({msg:"yes"});
         else
-            res.status(400).json({msg:"cant find"});
+            res.status(200).json({msg:"cant find"});
     }).catch(err=>{
-        res.status(400).json({msg:"cant find"})
+        res.status(200).json({msg:"cant find"})
     })
 })
 //route ended
