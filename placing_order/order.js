@@ -105,6 +105,7 @@ function save(id,Charge_id,Price){
             db.Recevier_Name=user.Recevier_Name;
             db.Recevier_Email=user.Recevier_Email;
             db.Price=Price;
+            db.Earning=Price*0.2;
             db.Weight=user.Weight;
             db.Date=user.Date;
             db.Length=user.Length;
