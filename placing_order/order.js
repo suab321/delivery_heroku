@@ -72,6 +72,7 @@ router.post('/temp_place_order',verify,(req,res)=>{
              db.Length=req.body.Length;
              db.Landmark=req.body.Landmark;
              db.Pickup_Date=req.body.Pickup_Date;
+             db.Delivery_Date_user=req.body.Delivery_Date_user;
              db.Date=new Date();
              db.save().then(user=>{
                 res.status(200).json({user,response:"1"});
@@ -113,6 +114,7 @@ function save(id,Charge_id,Price){
             db.Height=user.Height;
             db.Landmark=user.Landmark;
             db.Pickup_Date=user.Pickup_Date;
+            db.Delivery_Date_user=user.Delivery_Date_user;
             db.Charge_id=Charge_id;
             db.Order_Stamp=Date.now();
             db.save().then(user=>{
