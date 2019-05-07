@@ -69,6 +69,7 @@ const temp_Order_schema=new mongoose.Schema({
     Date:String,
     Pickup_Date:String,
     Landmark:String,
+    Order_Stamp:String,
     Delivery_Date_User:String
 })
 
