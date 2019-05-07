@@ -45,7 +45,7 @@ const Order_schema=new mongoose.Schema({
     Pickup_Date:String,
     Landmark:String,
     Order_Stamp:String,
-    Delivery_Date_user:String
+    Delivery_Date_User:String
 })
 
 const temp_Order_schema=new mongoose.Schema({
@@ -69,6 +69,7 @@ const temp_Order_schema=new mongoose.Schema({
     Date:String,
     Pickup_Date:String,
     Landmark:String,
+    Delivery_Date_User:String
 })
 
 
