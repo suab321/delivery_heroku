@@ -75,7 +75,7 @@ app.get('/payment/complete',verify,(req,res)=>{
 })
 
 app.get('/successful_payment',(req,res)=>{
-    res.render('success');
+    res.sendFile('success.html');
 })
 
 app.get('/pay_for_service1',verify,(req,res)=>{
