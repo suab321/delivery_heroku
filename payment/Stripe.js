@@ -31,6 +31,7 @@ router.post('/pay',(req,res)=>{
       }).then(res=>{
         console.log(res);
         save(req.body.order_id,res.id,req.body.amount);
+        res.json({msg:"payment was successful"})
         console.log("payment was successful")
       }).catch(err=> {
         console.log(err)
