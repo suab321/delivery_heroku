@@ -34,8 +34,8 @@ router.post('/pay',(req,res)=>{
         res.json({msg:"payment was successful"})
         console.log("payment was successful")
       }).catch(err=> {
-        console.log(err)
         res.json({msg:"Your transaction failed..Try again after sometime"});
+        console.log(err)
       })
 })
 //route for paying ended
