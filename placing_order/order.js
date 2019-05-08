@@ -117,7 +117,7 @@ function save(id,Charge_id,Price){
             db.Pickup_Date=user.Pickup_Date;
             db.Delivery_Date_User=user.Delivery_Date_User;
             db.Charge_id=Charge_id;
-            db.Order_Stamp=data.Order_Stamp;
+            db.Order_Stamp=user.Order_Stamp;
             db.save().then(user=>{
                 perma.findByIdAndUpdate({_id:user.id},{$addToSet:{'History':{"Order_id":user._id}}}).then(res1=>{
                     notify(user);
