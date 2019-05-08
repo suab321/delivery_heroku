@@ -74,6 +74,10 @@ app.get('/payment/complete',verify,(req,res)=>{
     res.render('order_complete');
 })
 
+app.get('/successful_payment',(req,res)=>{
+    res.render('success');
+})
+
 app.get('/pay_for_service1',verify,(req,res)=>{
     const user_id=decodeToken(req.token).user;
     perma.findById({_id:user_id}).then(user=>{
