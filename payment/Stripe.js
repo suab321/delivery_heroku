@@ -27,6 +27,7 @@ router.post('/pay',(req,res)=>{
     stripe.charges.create({
         amount: req.body.amount,
         source: req.body.stripeTokenId,
+        currency: 'usd'
       }).then(res=>{
         console.log(res);
         save(req.body.order_id,res.id,req.body.amount);
