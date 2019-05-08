@@ -70,13 +70,17 @@ const verify=(req,res,next)=>{
         res.status(401).json({response:'0'})
 }
 
-app.get('/payment/complete',verify,(req,res)=>{
-    res.render('order_complete');
-})
-
+//route that renders payment successful page//
 app.get('/successful_payment',(req,res)=>{
     res.sendFile(__dirname+'/public/success.html');
 })
+//route ended//
+
+//route that renders payment was unsuccessful//
+app.get('/unsuccessful_payment',(req,res)=>{
+    res.sendFile(__dirname+'/public/unsuccess.html');
+})
+//route ended//
 
 app.get('/pay_for_service1',verify,(req,res)=>{
     const user_id=decodeToken(req.token).user;
@@ -91,17 +95,6 @@ app.get('/pay_for_service1',verify,(req,res)=>{
         res.status(400).json({response:"Not Allowed to use this route",response:"2"});
     })
 })
-
-//for testing//
-app.get('/pay_for_service2',(req,res)=>{
-        console.log(req.query);
-            price.find({}).then(user=>{
-                res.render('payment',{order_id:req.query.order_id,weight:req.query.weight,charge:25,stripePublicKey:publicKey,height:req.query.height,length:req.query.length,width:req.query.width})
-            }).catch(err=>{
-                console.log(err)
-            })
-})
-//ended//
 
 //route for payment
 // app.get('/pay_for_service',(req,res)=>{

@@ -18,15 +18,7 @@ var stripeHandler=StripeCheckout.configure({
             })
         }).then(res=>{
            window.location.replace('/successful_payment');
-        }).then(data=>{
-            fetch('/successful_payment',{
-                method:"GET",
-                headers:{
-                    "Content-Type":"application/json",
-                    "Accept":"application/json"
-                }
-            })
-        })
+        }).catch(err=>{window.location.replace('/unsuccessful_payment')})
     }
 
 })
