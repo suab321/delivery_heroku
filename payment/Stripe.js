@@ -31,11 +31,12 @@ router.post('/pay',(req,res)=>{
       }).then(res=>{
         console.log(res);
         save(req.body.order_id,res.id,req.body.amount);
-        res.json({msg:"payment was successful"})
+        res.json({code:"1",msg:"payment was successful"})
         console.log("payment was successful")
       }).catch(err=> {
-        res.json({msg:"Your transaction failed..Try again after sometime"});
-        console.log(err)
+        res.json({code:"0",msg:"Your transaction failed..Try again after sometime"});
+        console.log("error in payment")
+        //console.log(err)
       })
 })
 //route for paying ended

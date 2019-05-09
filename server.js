@@ -97,10 +97,10 @@ app.get('/pay_for_service1',verify,(req,res)=>{
 })
 
 //route for payment
-// app.get('/pay_for_service',(req,res)=>{
-//                 res.render('payment',{order_id:req.query.order_id,weight:req.query.weight,charge:25,stripePublicKey:publicKey,height:req.query.height,length:req.query.length,width:req.query.width})
+app.get('/pay_for_service2',(req,res)=>{
+    res.render('payment',{order_id:req.query.order_id,weight:req.query.weight,charge:25,stripePublicKey:publicKey,height:req.query.height,length:req.query.length,width:req.query.width})
 
-// })
+})
 //route payment
 
 const port_connection=app.listen(process.env.PORT || 3002);
