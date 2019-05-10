@@ -51,7 +51,6 @@ router.get('/get_orders',(req,res)=>{
 })
 //route ended///
 
-
 //route to get all charges//
 router.get('/get_chargeId',(req,res)=>{
     price.find({}).then(user=>{

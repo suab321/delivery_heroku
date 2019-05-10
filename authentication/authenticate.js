@@ -333,9 +333,9 @@ router.get('/order_history',get_token,(req,res)=>{
         var perma_orders=[];
         var temp_orders=[];
         order.find({User_id:user_id}).then(user=>{
-            perma_orders=user;
+            perma_orders=user.reverse();
         temp_order.find({User_id:user_id}).then(user=>{
-            temp_orders=user;
+            temp_orders=user.reverse();
             var orders=perma_orders.concat(temp_orders);
             res.status(200).json(orders);
         })
