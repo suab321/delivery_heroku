@@ -41,7 +41,9 @@ router.get('/get_pending_users',(req,res)=>{
 //route to get placed Order list//
 router.get('/get_orders',(req,res)=>{
     order.find({}).then(user=>{
+        console.log(user);
         user.reverse();
+        console.log(user);
         res.status(200).json(user);
     }).catch(err=>{
         res.status(400).json(err);
