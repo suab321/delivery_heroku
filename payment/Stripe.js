@@ -28,14 +28,13 @@ router.post('/pay',(req,res)=>{
         amount: req.body.amount,
         source: req.body.stripeTokenId,
         currency: 'usd'
-      }).then(res=>{
-        console.log(res);
-        save(req.body.order_id,res.id,req.body.amount);
-        res.json({code:"1",msg:"payment was successful"})
+      }).then(user=>{
         console.log("payment was successful")
-      }).catch(err=> {
-        res.json({code:"0",msg:"Your transaction failed..Try again after sometime"});
+        save(req.body.order_id,user.id,req.body.amount);
+        res.status(200).json({code:"1",msg:"payment was successful"})
+      }).catch(err=>{
         console.log("error in payment")
+        res.status(400).json({code:"0",msg:"Your transaction failed..Try again after sometime"});
         //console.log(err)
       })
 })

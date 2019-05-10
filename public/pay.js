@@ -17,12 +17,12 @@ var stripeHandler=StripeCheckout.configure({
                 amount:amount
             })
         }).then(res=>{
-        if(res.data.code)
-           window.location.replace('/successful_payment');
+            console.log(res.status)
+        if(res.status === 200)
+            window.location.replace('/successful_payment');
         else
             window.location.replace('/unsuccessful_payment')
         }).catch(err=>{
-            console.log("error in payment")
             window.location.replace('/unsuccessful_payment')
         })
     }
@@ -31,7 +31,7 @@ var stripeHandler=StripeCheckout.configure({
 
 
 console.log("yes");
-console.log(charge*weight);
+console.log(amount);
 stripeHandler.open({
     amount
 })
