@@ -8,6 +8,7 @@ const {charge_detail}=require('../payment/Stripe')
 //route to get unpaid orders///
 router.get('/get_pending_orders',(req,res)=>{
     temp_order.find().then(user=>{
+        user.reverse();
         res.status(200).json(user);
     }).catch(err=>{
         res.status(400).json(err);
@@ -18,6 +19,7 @@ router.get('/get_pending_orders',(req,res)=>{
 //route to get all users//
 router.get('/get_users',(req,res)=>{
     perma.find({}).then(user=>{
+        user.reverse()
         res.status(200).json(user);
     }).catch(err=>{
         res.status(400).json(err);
@@ -28,6 +30,7 @@ router.get('/get_users',(req,res)=>{
 //route to unverified users///
 router.get('/get_pending_users',(req,res)=>{
     temp.find({}).then(user=>{
+        user.reverse();
         res.status(200).json(user);
     }).catch(err=>{
         res.status(400).json(err);
@@ -38,6 +41,7 @@ router.get('/get_pending_users',(req,res)=>{
 //route to get placed Order list//
 router.get('/get_orders',(req,res)=>{
     order.find({}).then(user=>{
+        user.reverse();
         res.status(200).json(user);
     }).catch(err=>{
         res.status(400).json(err);
