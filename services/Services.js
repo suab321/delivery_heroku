@@ -51,7 +51,7 @@ router.get('/get_chargeId',(req,res)=>{
     price.find({}).then(user=>{
         res.status(200).json(user);
     }).catch(err=>{
-        console.log(err);
+        console.log(err)
     })
 })
 //route ended///

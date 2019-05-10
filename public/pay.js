@@ -17,7 +17,7 @@ var stripeHandler=StripeCheckout.configure({
                 amount:amount
             })
         }).then(res=>{
-        if(res.formData.code)
+        if(res.data.code)
            window.location.replace('/successful_payment');
         else
             window.location.replace('/unsuccessful_payment')
