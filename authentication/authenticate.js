@@ -77,7 +77,7 @@ const verfiy=(email,token)=>{
         to:email,
         subject:"Activate your Stowaway Account by verifying this link",
         text:"Click the below link for verification",
-        html:'<p>Welcome to stowaway.</p><br><p>Please click on the following link or copy and paste the link to confirm your registration:<a href="https://floating-brushlands-52313.herokuapp.com/authentication/verification/'+token+'">'+token+'</a></p><p>From,<br>Team Stowaway</p>'
+        html:'<p>Thank You and welcome to Stowaway.To activate your activate your account please click on the following link or copy and paste the link to confirm your registration:<a href="https://floating-brushlands-52313.herokuapp.com/authentication/verification/'+token+'">'+token+'</a></p><p>From,<br>Team Stowaway</p>'
     }
 
     transporter.sendMail(mailoption,(err,res)=>{
@@ -97,7 +97,7 @@ const resetpass=(email,token)=>{
         to:email,
         subject:"Reset your Stowaway account password by verifying this link",
         text:"Click the link for restting password",
-        html:'<p>To reset your Stowaway Account please click on the following link or copy and paste the URL into yourbrowser window <a href="https://floating-brushlands-52313.herokuapp.com/authentication/reseting/'+token+'">'+token+'</a> After you change the accounts password you will be able to change your password and log in to your account</p>'
+        html:'<p>You recently requested to reset your password for your Stowaway account.Click on the link to reset your password<a href="https://floating-brushlands-52313.herokuapp.com/authentication/reseting/'+token+'">'+token+'</a> After you change the accounts password you will be able to change your password and log in to your account</p>'
     }
 
     transporter.sendMail(mailoption,(err,res)=>{
