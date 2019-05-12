@@ -58,7 +58,7 @@ const sendOTP=(email,number,who)=>{
         from:"stowawaysuab123@gmail.com",
         to:email,
         subject:"Stowaway:Recevie your package with this OTP",
-        html:`<p>Dear Customar</p><br><p>Thank you for orddering from Stowaway This is the OTP you would share with your service provider when they come to deliver the package to deliver the package.Without this OTP you wouldn't be able to complete the delvery.<h3>${number}</h3>*Do not share the OTP with anyone</p>`
+        html:`<p>Dear Customar</p><br><p>Thank you for orddering from Stowaway This is the OTP you would share with your service provider when they come to deliver the package to deliver the package.Without this OTP you wouldn't be able to complete the delivery.<h3>${number}</h3>*Do not share the OTP with anyone</p>`
     }
     transporter.sendMail(mailoption,(err,res)=>{
         if(err)
@@ -77,7 +77,7 @@ const verfiy=(email,token)=>{
         to:email,
         subject:"Activate your Stowaway Account by verifying this link",
         text:"Click the below link for verification",
-        html:'<p>Welcome to stowaway.</p><br><p>Please click on the following link or copy and paste the libk to confirm your registration:<a href="https://floating-brushlands-52313.herokuapp.com/authentication/verification/'+token+'">'+token+'</a></p><p>From,<br>Team Stowaway</p>'
+        html:'<p>Welcome to stowaway.</p><br><p>Please click on the following link or copy and paste the link to confirm your registration:<a href="https://floating-brushlands-52313.herokuapp.com/authentication/verification/'+token+'">'+token+'</a></p><p>From,<br>Team Stowaway</p>'
     }
 
     transporter.sendMail(mailoption,(err,res)=>{
