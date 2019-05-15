@@ -77,7 +77,7 @@ const verfiy=(email,token,Name)=>{
         to:email,
         subject:"Activate your Stowaway Account by verifying this link",
         text:"Click the below link for verification",
-        html:'<h3> Hi'+Name+', </h3><p>Thank You and welcome to Stowaway.To activate your account please click on the link below to confirm your registration.</p><p><a href="https://floating-brushlands-52313.herokuapp.com/authentication/verification/'+token+'">'+token+'</a></p><p>If you are having trouble clicking the link,copy and paste the URL above in your web browser</p><p>From,<br>Team Stowaway</p>'
+        html:'<h3> Hi '+Name+', </h3><p>Thank You and welcome to Stowaway.To activate your account please click on the link below.</p><p><a href="https://floating-brushlands-52313.herokuapp.com/authentication/verification/'+token+'">'+token+'</a></p><p>If you are having trouble clicking the link,copy and paste the URL above in your web browser</p><p>From,<br>Team Stowaway</p>'
     }
 
     transporter.sendMail(mailoption,(err,res)=>{
