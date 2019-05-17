@@ -74,6 +74,10 @@ router.post('/temp_place_order',verify,(req,res)=>{
              db.Pickup_Date=req.body.Pickup_Date;
              db.Delivery_Date_User=req.body.Delivery_Date_User;
              db.Date=new Date();
+             db.G_Latitude=req.body.G_Latitude;
+             db.G_Longitude=req.body.G_Longitude;
+             db.R_Latitude=req.body.R_Latitude;
+             db.R_Longitude=req.body.R_Longitude;
              db.Order_Stamp=Date.now();
              db.save().then(user=>{
                 res.status(200).json({user,response:"1"});
@@ -118,6 +122,10 @@ function save(id,Charge_id,Price){
             db.Delivery_Date_User=user.Delivery_Date_User;
             db.Charge_id=Charge_id;
             db.Order_Stamp=user.Order_Stamp;
+            db.G_Latitude=user.G_Latitude;
+            db.G_Longitude=user.G_Longitude;
+            db.R_Latitude=user.R_Latitude;
+            db.R_Longitude=user.R_Longitude;
             db.save().then(user=>{
                 perma.findByIdAndUpdate({_id:user.id},{$addToSet:{'History':{"Order_id":user._id}}}).then(res1=>{
                     notify(user);

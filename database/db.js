@@ -45,7 +45,11 @@ const Order_schema=new mongoose.Schema({
     Pickup_Date:String,
     Landmark:String,
     Order_Stamp:String,
-    Delivery_Date_User:String
+    Delivery_Date_User:String,
+    G_Latitude:String,
+    G_Longitude:String,
+    R_Latitude:String,
+    R_Longitude:String
 })
 
 const temp_Order_schema=new mongoose.Schema({
@@ -70,7 +74,11 @@ const temp_Order_schema=new mongoose.Schema({
     Pickup_Date:String,
     Landmark:String,
     Order_Stamp:String,
-    Delivery_Date_User:String
+    Delivery_Date_User:String,
+    G_Latitude:String,
+    G_Longitude:String,
+    R_Latitude:String,
+    R_Longitude:String
 })
 
 
