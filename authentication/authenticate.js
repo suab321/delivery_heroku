@@ -388,7 +388,7 @@ router.get('/get_order_parameter',get_token,(req,res)=>{
     const userId=token.decodeToken(req.token).user;
     if(userId){
     perma.findById({_id:userId}).then(user=>{
-        const price=req.query.height*req.query.width*req.query.length*req.query.weight*0.01*25;
+        const price=req.query.height*req.query.width*req.query.length*req.query.weight*0.01*25*0.01;
         res.status(200).json({price:`${price}`});
     }).catch(err=>{
         res.status(400).json({msg:"You are not a valid user",reponse:"1"});
