@@ -75,8 +75,8 @@ router.post('/order_accepted',(req,res)=>{
         else if(err)
             console.log("26 socket_fucn"+err);
     })
-    authentication.sendOTP(req.body.data.Recevier_Email,req.body.recevier_unique);
-    authentication.sendOTP(req.body.data.Giver_Email,req.body.sender_unique);
+    authentication.sendOTP_R(req.body.data.Recevier_Email,req.body.recevier_unique);
+    authentication.sendOTP_S(req.body.data.Giver_Email,req.body.sender_unique);
 })
 
 
