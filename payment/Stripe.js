@@ -4,6 +4,7 @@ const secretKey="sk_test_Wae1JVypvlaoK5pLIFPsrexC0060Ik7P4F";
 const publicKey="pk_test_mNSmGjYqswUKp1NnrGGuNk8f004q3h4DWh";
 
 const stripe=require('stripe')(secretKey);
+const axios=require('axios')
 
 const {save,cancel_order}=require("../placing_order/order");
 const {emit_transaction_complete}=require('../sockets/socket_fucn');
