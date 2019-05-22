@@ -52,7 +52,7 @@ const sendOTP_S=(email,number)=>{
             console.log(res);
     })
 }
-var sendOTP_R=(email,number)=>{
+const sendOTP_R=(email,number)=>{
     const mailoption={
         from:"stowawaysuab123@gmail.com",
         to:email,
