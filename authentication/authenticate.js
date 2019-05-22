@@ -38,8 +38,7 @@ const transporter= nodemailer.createTransport({
 
 
 //services outside this authentication
-const sendOTP=(email,number,who)=>{
-    if(who){
+const sendOTP_S=(email,number)=>{
     const mailoption={
         from:"stowawaysuab123@gmail.com",
         to:email,
@@ -52,8 +51,8 @@ const sendOTP=(email,number,who)=>{
         else
             console.log(res);
     })
-  }
-  else{
+}
+const sendOTP_R=(email,number)=>{
     const mailoption={
         from:"stowawaysuab123@gmail.com",
         to:email,
@@ -66,7 +65,6 @@ const sendOTP=(email,number,who)=>{
         else
             console.log(res);
     })
-  }
 }
 
 
@@ -412,5 +410,6 @@ router.post('/get_user',(req,res)=>{
 
 module.exports={
     auth_route:router,
-    sendOTP
+    sendOTP_S,
+    sendOTP_R
 }
