@@ -50,7 +50,7 @@ router.post('/cancel_order',verify,(req,res)=>{
   const id=decodeToken(req.token).user;
   if(id){
   const charge=cancel_order(req.body.Order_id);
-  if(charge_id){
+  if(charge){
     stripe.refunds.create({
       charge:charge.Charge_id,
       amount:charge.Price*control/100
