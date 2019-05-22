@@ -43,7 +43,7 @@ const sendOTP_S=(email,number)=>{
         from:"stowawaysuab123@gmail.com",
         to:email,
         subject:"Stowaway:Start your trip with this OTP",
-        html:`<p>Dear Customer</p><br><p>Thank you for ordering from Stowaway This is the OTP you would share with your driver to start the Trip <h3>${number}</h3> *Do not share the OTP with anyone</p>`
+        html:`<p>Dear Customer</p><br><p>Thank you for ordering from Stowaway.This is the OTP you would share with your driver to start the Trip <h3>${number}</h3> *Do not share the OTP with anyone</p>`
     }
     transporter.sendMail(mailoption,(err,res)=>{
         if(err)
