@@ -51,15 +51,16 @@ router.post('/cancel_order',verify,(req,res)=>{
   const id=decodeToken(req.token).user;
   if(id){
     order.findByIdAndUpdate({_id:Order_id},{CurrentStatus:4}).then(user=>{
-      const charge_id=user.Charge_id;
       const resp1=user;
           axios.get(`${driver_backend}/services/delete_order/${user._id}`).then(user=>{
             stripe.refunds.create({
-              charge:charge.Charge_id,
-              amount:charge.Price*control/100
+              charge:resp1.Charge_id,
+              amount:resp1.Price*control/100
             }).then(refund=>{
               console.log(refund);
+              res.status(200).json({res:"1",msg:"successfully cancelled orer"});
             }).catch(err=>{
+              res.status(400).json({res:"2",msg:"error in refunding"});
               console.log(err);
             })
             }).catch(err=>{
