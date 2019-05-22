@@ -7,7 +7,8 @@ const stripe=require('stripe')(secretKey);
 
 const {save,cancel_order}=require("../placing_order/order");
 const {emit_transaction_complete}=require('../sockets/socket_fucn');
-const {decodeToken}=require('../jwt/jwt')
+const {decodeToken}=require('../jwt/jwt');
+const {admin_link}=require('../urls/links');
 
 
 
@@ -42,12 +43,16 @@ router.post('/pay',(req,res)=>{
 
 //route for cancelling order//
 router.post('/cancel_order',verify,(req,res)=>{
+  var control;
+  axios.get(`${admin_link}/authentication/get_controls/1`).then(user=>{
+  control=user.data;
   const id=decodeToken(req.token).user;
   if(id){
-  const charge_id=cancel_order(req.body.Order_id);
+  const charge=cancel_order(req.body.Order_id);
   if(charge_id){
     stripe.refunds.create({
-      charge:charge_id
+      charge:charge.Charge_id,
+      amount:charge.Price*control/100
     }).then(refund=>{
       console.log(refund);
       return 1;
@@ -61,6 +66,7 @@ router.post('/cancel_order',verify,(req,res)=>{
 }
 else
   res.status(400).json({response:"3"});
+}).catch(err=>{console.log("error in stripejs line 69 "+err)});
 })
 
 //route for cancelling order ended//
