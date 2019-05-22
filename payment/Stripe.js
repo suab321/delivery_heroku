@@ -50,7 +50,7 @@ router.post('/cancel_order',verify,(req,res)=>{
   control=user.data;
   const id=decodeToken(req.token).user;
   if(id){
-    order.findByIdAndDelete({_id:Order_id}).then(user=>{
+    order.findByIdAndUpdate({_id:Order_id},{CurrentStatus:4}).then(user=>{
       const charge_id=user.Charge_id;
       const resp1=user;
           axios.get(`${driver_backend}/services/delete_order/${user._id}`).then(user=>{
