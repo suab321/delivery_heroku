@@ -6,10 +6,11 @@ const publicKey="pk_test_mNSmGjYqswUKp1NnrGGuNk8f004q3h4DWh";
 const stripe=require('stripe')(secretKey);
 const axios=require('axios')
 
-const {save,cancel_order}=require("../placing_order/order");
+const {save}=require("../placing_order/order");
 const {emit_transaction_complete}=require('../sockets/socket_fucn');
 const {decodeToken}=require('../jwt/jwt');
 const {admin_link}=require('../urls/links');
+const {order}=require('../database/db')
 
 
 
@@ -49,21 +50,25 @@ router.post('/cancel_order',verify,(req,res)=>{
   control=user.data;
   const id=decodeToken(req.token).user;
   if(id){
-  const charge=cancel_order(req.body.Order_id);
-  if(charge){
-    stripe.refunds.create({
-      charge:charge.Charge_id,
-      amount:charge.Price*control/100
-    }).then(refund=>{
-      console.log(refund);
-      return 1;
-    }).catch(err=>{
-      console.log(err);
+    order.findByIdAndDelete({_id:Order_id}).then(user=>{
+      const charge_id=user.Charge_id;
+      const resp1=user;
+          axios.get(`${driver_backend}/services/delete_order/${user._id}`).then(user=>{
+            stripe.refunds.create({
+              charge:charge.Charge_id,
+              amount:charge.Price*control/100
+            }).then(refund=>{
+              console.log(refund);
+            }).catch(err=>{
+              console.log(err);
+            })
+            }).catch(err=>{
+              res.status(400).json("Error updating on driver side");
+            }) 
+  }).catch(err=>{
+      console.log(err)
       return 0;
-    })
-  }
-  else
-    res.status(400).json({response:"2"});
+  })
 }
 else
   res.status(400).json({response:"3"});
