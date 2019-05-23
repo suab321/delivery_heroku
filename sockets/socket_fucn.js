@@ -30,22 +30,22 @@ function connection(port){
             users=new_user;
             console.log(users);
         })
-        connected_socket.on("request_accepted_bydriver",(data)=>{
-            // console.log("19 socket_fucn"+data);
-            console.log("data"+data.data);
-            console.log("user"+data.user);
-            perma.update({_id:data.User_id,'History.Order_id':data._id},
-            {$set:{'History.$.CurrentStatus':1}},{new:true},(err,result)=>{
-                if(result){
-                    order.findByIdAndUpdate({_id:data.Order_id},{CurrentStatus:1,Driver_id:data.Driver_id,Giver_Otp:data.sender_unique,Recevier_Otp:data.recevier_unique}).then(user=>{
-                    }).catch(err=>console.log("26 socket_fucn"+err))
-                }
-                else if(err)
-                    console.log("26 socket_fucn"+err);
-            })
-            authentication.sendOTP_S(data.Recevier_Email,data.recevier_unique,data.data.Name,data.data.Giver_Name);
-            authentication.sendOTP_R(data.Giver_Email,data.sender_unique,data.data.Recevier_Name,data.data.Giver_Name);
-        });
+        // connected_socket.on("request_accepted_bydriver",(data)=>{
+        //     // console.log("19 socket_fucn"+data);
+        //     console.log("data"+data.data);
+        //     console.log("user"+data.user);
+        //     perma.update({_id:data.User_id,'History.Order_id':data._id},
+        //     {$set:{'History.$.CurrentStatus':1}},{new:true},(err,result)=>{
+        //         if(result){
+        //             order.findByIdAndUpdate({_id:data.Order_id},{CurrentStatus:1,Driver_id:data.Driver_id,Giver_Otp:data.sender_unique,Recevier_Otp:data.recevier_unique}).then(user=>{
+        //             }).catch(err=>console.log("26 socket_fucn"+err))
+        //         }
+        //         else if(err)
+        //             console.log("26 socket_fucn"+err);
+        //     })
+        //     authentication.sendOTP_S(data.Recevier_Email,data.recevier_unique,data.data.Name,data.data.Giver_Name);
+        //     authentication.sendOTP_R(data.Giver_Email,data.sender_unique,data.data.Recevier_Name,data.data.Giver_Name);
+        // });
         
         connected_socket.on("user_from_user_frontend",data=>{
             io.sockets.emit("user_to_driver_frontend",data);
@@ -76,8 +76,8 @@ router.post('/order_accepted',(req,res)=>{
         else if(err)
             console.log("26 socket_fucn"+err);
     })
-    authentication.sendOTP_R(req.body.data.Recevier_Email,req.body.recevier_unique);
-    authentication.sendOTP_S(req.body.data.Giver_Email,req.body.sender_unique);
+    authentication.sendOTP_R(req.body.data.Recevier_Email,req.body.recevier_unique,req.body.data.Recevier_Name,req.body.data.Giver_Name);
+    authentication.sendOTP_S(req.body.data.Giver_Email,req.body.sender_unique,req.body.data.Name,req.body.data.Giver_Name);
 })
 
 
