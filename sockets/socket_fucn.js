@@ -31,7 +31,7 @@ function connection(port){
             console.log(users);
         })
         connected_socket.on("request_accepted_bydriver",(data)=>{
-            console.log("19 socket_fucn"+data);
+            // console.log("19 socket_fucn"+data);
             console.log(data.data);
             console.log(data.user);
             perma.update({_id:data.User_id,'History.Order_id':data._id},
