@@ -43,7 +43,7 @@ router.post('/pay',(req,res)=>{
 })
 //route for paying ended
 
-//route for cancelling order//
+//route for cancelling order for users//
 router.post('/cancel_order',verify,(req,res)=>{
   var control;
   axios.get(`${admin_link}/authentication/get_controls/1`).then(user=>{
@@ -52,6 +52,7 @@ router.post('/cancel_order',verify,(req,res)=>{
   if(id){
     order.findByIdAndUpdate({_id:req.body.Order_id},{CurrentStatus:4}).then(user=>{
       const resp1=user;
+      if(resp1.CurrentStatus<2){
           axios.get(`${driver_backend}/services/delete_order/${user._id}`).then(user=>{
             stripe.refunds.create({
               charge:resp1.Charge_id,
@@ -65,7 +66,11 @@ router.post('/cancel_order',verify,(req,res)=>{
             })
             }).catch(err=>{
               res.status(400).json("Error updating on driver side");
-            }) 
+            })
+          }
+          else{
+            res.status(400).json({res:"3",msg:"Unable to cancel order at this stage"});
+          } 
   }).catch(err=>{
       console.log(err)
       return 0;
@@ -75,8 +80,44 @@ else
   res.status(400).json({response:"3"});
 }).catch(err=>{console.log("error in stripejs line 69 "+err)});
 })
+//route for cancelling order ended for users ended//
 
-//route for cancelling order ended//
+
+
+//route for cancelling orders by admin//
+router.post('/cancel_order_admin',(req,res)=>{
+  var control;
+  axios.get(`${admin_link}/authentication/get_controls/1`).then(user=>{
+  control=user.data;
+    order.findByIdAndUpdate({_id:req.body.Order_id},{CurrentStatus:4}).then(user=>{
+      const resp1=user;
+      if(resp1.CurrentStatus<2){
+          axios.get(`${driver_backend}/services/delete_order/${user._id}`).then(user=>{
+            stripe.refunds.create({
+              charge:resp1.Charge_id,
+              amount:resp1.Price*control/100
+            }).then(refund=>{
+              console.log(refund);
+              res.status(200).json({res:"1",msg:"successfully cancelled orer"});
+            }).catch(err=>{
+              res.status(400).json({res:"2",msg:"error in refunding"});
+              console.log(err);
+            })
+            }).catch(err=>{
+              res.status(400).json("Error updating on driver side");
+            })
+          }
+          else{
+            res.status(400).json({res:"3",msg:"Uanble to cancel order at ths state"});
+          }
+  }).catch(err=>{
+      console.log(err)
+      res.status(400).json({res:"4",msg:"Order does not exist"});
+      return 0;
+  })
+}).catch(err=>{console.log("error in stripejs line 69 "+err)});
+})
+//route for cancelling order by admin ended//
 
 
 //function to get charge details//
