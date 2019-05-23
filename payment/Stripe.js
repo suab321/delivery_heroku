@@ -36,6 +36,7 @@ router.post('/pay',(req,res)=>{
         save(req.body.order_id,user.id,req.body.amount);
         res.status(200).json({code:"1",msg:"payment was successful"})
       }).catch(err=>{
+        console.log(err)
         console.log("error in payment")
         res.status(400).json({code:"0",msg:"Your transaction failed..Try again after sometime"});
         //console.log(err)

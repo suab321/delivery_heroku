@@ -43,7 +43,7 @@ const sendOTP_S=(email,number,d_name,s_name)=>{
         from:"stowawaysuab123@gmail.com",
         to:email,
         subject:"Stowaway:Start your trip with this OTP",
-    html:`<p>Dear ${s_name}</p><br><p>${d_name} will collect the package from pickup address.This the OTP(<h3>${number}</h3>) you will share with the shipper once they have arrived with the package.Without this OTP the delivery cannot be started.</p><p><h3>${number}</h3></p><p> *Do not share the OTP with anyone</p>`
+    html:`<p>Dear ${s_name}</p><br><p>${d_name} will collect the package from pickup address.This is the one time password (OTP) you will share with the shipper once they have arrived with the package.Without this OTP the delivery can not be started.<h3>OTP- ${number}</h3> *Do not share the OTP with anyone</p>`
     }
     transporter.sendMail(mailoption,(err,res)=>{
         if(err)
@@ -57,7 +57,7 @@ const sendOTP_R=(email,number,r_name,s_name)=>{
         from:"stowawaysuab123@gmail.com",
         to:email,
         subject:"Stowaway:Receive your package with this OTP",
-    html:`<p>Dear ${r_name}</p><br><p>${s_name} is having a package delivered to your home.This your OTP(<h3>${number}</h3>) you will share with the shipper once they have arrived with package.Without this OTP the package will not delivered.</p><p><h3>OTP- ${number}</h3>*</p><p>Do not share the OTP with anyone</p>`
+    html:`<p>Dear ${r_name}</p><br><p>${s_name} is having a package delivered to your home.This is the one time password (OTP) you will share with the shipper once they have arrived with package.Without this OTP the package will not delivered.<h3>OTP- ${number}</h3> *Do not share the OTP with anyone</p>`
     }
     transporter.sendMail(mailoption,(err,res)=>{
         if(err)
