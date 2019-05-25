@@ -51,8 +51,8 @@ router.post('/cancel_order',verify,(req,res)=>{
   control=user.data;
   const id=decodeToken(req.token).user;
   if(id){
-      if(resp1.CurrentStatus<2){
           axios.get(`${driver_backend}/services/delete_order/${req.body.Order_id}`).then(user=>{
+            if(resp1.CurrentStatus<2){
              order.findByIdAndUpdate({_id:req.body.Order_id},{CurrentStatus:4}).then(user=>{
               const resp1=user;
               stripe.refunds.create({
@@ -69,17 +69,18 @@ router.post('/cancel_order',verify,(req,res)=>{
               console.log(err)
               res.status(400).json({res:"3",msg:"Error updating on user side"});
             })
-          }).catch(err=>{
-              res.status(400).json({msg:"error updatin in driver side"});
-          })
-        }
+          }
           else{
             console.log(err);
             res.status(400).json({res:"4",msg:"Unable to cancel order at this stage"});
           } 
-}
-else
-  res.status(400).json({response:"3"});
+          }).catch(err=>{
+              res.status(400).json({msg:"error updatin in driver side"});
+          })
+        }
+        else{
+          res.status(403).json({res:"5",msg:"You are not allowed to cancel order"});
+        }
 }).catch(err=>{console.log("error in stripejs line 69 "+err)});
 })
 //route for cancelling order ended for users ended//
@@ -87,12 +88,12 @@ else
 
 
 //route for cancelling orders by admin//
-router.post('/cancel_order_admin',(req,res)=>{
+router.post('/cancel_order',(req,res)=>{
   var control;
   axios.get(`${admin_link}/authentication/get_controls/1`).then(user=>{
   control=user.data;
-      if(resp1.CurrentStatus<2){
           axios.get(`${driver_backend}/services/delete_order/${req.body.Order_id}`).then(user=>{
+            if(resp1.CurrentStatus<2){
              order.findByIdAndUpdate({_id:req.body.Order_id},{CurrentStatus:4}).then(user=>{
               const resp1=user;
               stripe.refunds.create({
@@ -109,14 +110,14 @@ router.post('/cancel_order_admin',(req,res)=>{
               console.log(err)
               res.status(400).json({res:"3",msg:"Error updating on user side"});
             })
-          }).catch(err=>{
-              res.status(400).json({msg:"error updatin in driver side"});
-          })
-        }
+          }
           else{
             console.log(err);
             res.status(400).json({res:"4",msg:"Unable to cancel order at this stage"});
           } 
+          }).catch(err=>{
+              res.status(400).json({msg:"error updatin in driver side"});
+          })
 }).catch(err=>{console.log("error in stripejs line 69 "+err)});
 })
 //route for cancelling order by admin ended//
