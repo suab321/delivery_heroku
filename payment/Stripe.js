@@ -51,11 +51,11 @@ router.post('/cancel_order',verify,(req,res)=>{
   control=user.data;
   const id=decodeToken(req.token).user;
   if(id){
-    order.findByIdAndUpdate({_id:req.body.Order_id},{CurrentStatus:4}).then(user=>{
-      const resp1=user;
       if(resp1.CurrentStatus<2){
-          axios.get(`${driver_backend}/services/delete_order/${user._id}`).then(user=>{
-            stripe.refunds.create({
+          axios.get(`${driver_backend}/services/delete_order/${req.body.Order_id}`).then(user=>{
+             order.findByIdAndUpdate({_id:req.body.Order_id},{CurrentStatus:4}).then(user=>{
+              const resp1=user;
+              stripe.refunds.create({
               charge:resp1.Charge_id,
               amount:resp1.Price*control/100
             }).then(refund=>{
@@ -67,17 +67,16 @@ router.post('/cancel_order',verify,(req,res)=>{
             })
             }).catch(err=>{
               console.log(err)
-              res.status(400).json({res:"3",msg:"Error updating on driver side"});
+              res.status(400).json({res:"3",msg:"Error updating on user side"});
             })
-          }
+          }).catch(err=>{
+              res.status(400).json({msg:"error updatin in driver side"});
+          })
+        }
           else{
             console.log(err);
             res.status(400).json({res:"4",msg:"Unable to cancel order at this stage"});
           } 
-  }).catch(err=>{
-      console.log(err)
-      res.status(400).json({res:"5",msg:"Error upadating order status at driver side"});
-  })
 }
 else
   res.status(400).json({response:"3"});
@@ -92,11 +91,11 @@ router.post('/cancel_order_admin',(req,res)=>{
   var control;
   axios.get(`${admin_link}/authentication/get_controls/1`).then(user=>{
   control=user.data;
-    order.findByIdAndUpdate({_id:req.body.Order_id},{CurrentStatus:4}).then(user=>{
-      const resp1=user;
       if(resp1.CurrentStatus<2){
-          axios.get(`${driver_backend}/services/delete_order/${user._id}`).then(user=>{
-            stripe.refunds.create({
+          axios.get(`${driver_backend}/services/delete_order/${req.body.Order_id}`).then(user=>{
+             order.findByIdAndUpdate({_id:req.body.Order_id},{CurrentStatus:4}).then(user=>{
+              const resp1=user;
+              stripe.refunds.create({
               charge:resp1.Charge_id,
               amount:resp1.Price*control/100
             }).then(refund=>{
@@ -107,17 +106,17 @@ router.post('/cancel_order_admin',(req,res)=>{
               console.log(err);
             })
             }).catch(err=>{
-              res.status(400).json("Error updating on driver side");
+              console.log(err)
+              res.status(400).json({res:"3",msg:"Error updating on user side"});
             })
-          }
+          }).catch(err=>{
+              res.status(400).json({msg:"error updatin in driver side"});
+          })
+        }
           else{
-            res.status(400).json({res:"3",msg:"Uanble to cancel order at ths state"});
-          }
-  }).catch(err=>{
-      console.log(err)
-      res.status(400).json({res:"4",msg:"Order does not exist"});
-      return 0;
-  })
+            console.log(err);
+            res.status(400).json({res:"4",msg:"Unable to cancel order at this stage"});
+          } 
 }).catch(err=>{console.log("error in stripejs line 69 "+err)});
 })
 //route for cancelling order by admin ended//
