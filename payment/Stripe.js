@@ -66,11 +66,11 @@ router.post('/cancel_order',verify,(req,res)=>{
               console.log(err);
             })
             }).catch(err=>{
-              res.status(400).json("Error updating on driver side");
+              res.status(400).json({res:"3",msg:"Error updating on driver side"});
             })
           }
           else{
-            res.status(400).json({res:"3",msg:"Unable to cancel order at this stage"});
+            res.status(400).json({res:"4",msg:"Unable to cancel order at this stage"});
           } 
   }).catch(err=>{
       console.log(err)
