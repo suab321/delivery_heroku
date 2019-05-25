@@ -52,7 +52,8 @@ router.post('/cancel_order',verify,(req,res)=>{
   const id=decodeToken(req.token).user;
   if(id){
           axios.get(`${driver_backend}/services/delete_order/${req.body.Order_id}`).then(user=>{
-            if(resp1.CurrentStatus<2){
+            order.findById({_id:req.body.Order_id}).then(user=>{
+            if(user.CurrentStatus<2){
              order.findByIdAndUpdate({_id:req.body.Order_id},{CurrentStatus:4}).then(user=>{
               const resp1=user;
               stripe.refunds.create({
@@ -65,15 +66,16 @@ router.post('/cancel_order',verify,(req,res)=>{
               res.status(400).json({res:"2",msg:"error in refunding"});
               console.log(err);
             })
+            
             }).catch(err=>{
               console.log(err)
               res.status(400).json({res:"3",msg:"Error updating on user side"});
             })
           }
           else{
-            console.log(err);
-            res.status(400).json({res:"4",msg:"Unable to cancel order at this stage"});
-          } 
+            res.status(400).json("unable to complete order at this stage");
+          }
+          })
           }).catch(err=>{
               res.status(400).json({msg:"error updatin in driver side"});
           })
