@@ -298,13 +298,13 @@ router.get('/reseting/:token',(req,res)=>{
 })
 
 //loggingOut from mongo session
-router.get('/logout',(req,res)=>{
-    if(req.session.user && req.cookies.user_sid){
-        res.clearCookie('user_sid').json({res:"1"});
-    }
-    else
-        res.status(401).json({err:"0"})
-})
+// router.get('/logout',(req,res)=>{
+    // if(req.session.user && req.cookies.user_sid){
+        // res.clearCookie('user_sid').json({res:"1"});
+    // }
+    // else
+        // res.status(401).json({err:"0"})
+// })
 
 
 //getting_users data based on token recevied in request
