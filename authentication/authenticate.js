@@ -407,6 +407,16 @@ router.post('/get_user',(req,res)=>{
 })
 //route ended///
 
+//Logout
+router.get('/logout',get_token,(req,res)=>{
+	const userId=token.decodeToken(req.token).user;
+    perma.findByIdAndUpdate({_id:userId},{device_id:''},{new:true}).then(user=>{
+		res.status(200).res({response:"1"});
+	}).catch(err=>{
+		res.status(400).json({response:"2"});
+	})
+})
+
 
 module.exports={
     auth_route:router,
