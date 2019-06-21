@@ -38,7 +38,7 @@ const transporter= nodemailer.createTransport({
 
 
 //services outside this authentication
-const sendOTP_S=(email,number,d_name,s_name)=>{
+const sendOTP_S=(email,number,d_name,s_name,driver_phone,driver_name,s_phone)=>{
     const mailoption={
         from:"stowawaysuab123@gmail.com",
         to:email,
@@ -52,7 +52,7 @@ const sendOTP_S=(email,number,d_name,s_name)=>{
             console.log(res);
     })
 }
-const sendOTP_R=(email,number,r_name,s_name)=>{
+const sendOTP_R=(email,number,r_name,s_name,driver_phone,driver_name,s_phone)=>{
     const mailoption={
         from:"stowawaysuab123@gmail.com",
         to:email,
@@ -285,11 +285,15 @@ router.get('/resetpass/:email',(req,res)=>{
 
 //link for new password req coming here from frontend ejs
 router.post('/ressetingdone/:token',(req,res)=>{
-    jwt.verify(req.params.token,"suab",(err,authdata)=>{
-        perma.findOneAndUpdate({Email:authdata.user},{Password:req.body.password},{new:true}).then(user=>{
-            res.render('notify');
-        }).catch(err=>{res.send(req.params.email)})
-    })
+    if(req.body.password === req.body.cpassword){
+        jwt.verify(req.params.token,"suab",(err,authdata)=>{
+            perma.findOneAndUpdate({Email:authdata.user},{Password:req.body.password},{new:true}).then(user=>{
+                res.render('notify');
+            }).catch(err=>{res.render('forgetpassword',{email:req.params.token,err:"Some error occured try again"})})
+        })
+    }
+    else
+        res.render('forgotpassword.ejs',{email:req.params.token,err:"Passwords dont match"});
 })
 
 //new password frontend after clicking on link on gmail
