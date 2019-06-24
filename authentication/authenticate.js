@@ -58,7 +58,7 @@ const sendOTP_R=(email,number,r_name,s_name,driver_phone,driver_name,s_phone,d_a
         from:"stowawaysuab123@gmail.com",
         to:email,
         subject:"Stowaway:Receive your package with this OTP",
-    html:`<p>Dear ${r_name},</p><p>${s_name} is having a package delivered to your home. This is the one time password (OTP) you will share with the shipper once they have arrived with package. Without this OTP the package will not be delivered.<br>OTP-${number}<br>Sender Name:${s_name}<br><Sender Phone Number:${s_phone}<br><br>Traveler Name:${driver_name}<br>Traveler Phone Number:${driver_phone}<br><br>Recevier Name:${r_name}<br>Recevier Phone Number:${r_phone}<br><br> *Do not share the OTP with anyone</p><p>Thanks,Team Stowaway</p>`
+    html:`<p>Dear ${r_name},</p><p>${s_name} is having a package delivered to your home. This is the one time password (OTP) you will share with the shipper once they have arrived with package. Without this OTP the package will not be delivered.</p><br><p>OTP-${number}<br>Sender Name:${s_name}<br><Sender Phone Number:${s_phone}<br><br>Traveler Name:${driver_name}<br>Traveler Phone Number:${driver_phone}<br><br>Recevier Name:${r_name}<br>Recevier Phone Number:${r_phone}<br><br> *Do not share the OTP with anyone</p><p>Thanks,Team Stowaway</p>`
     }
     transporter.sendMail(mailoption,(err,res)=>{
         if(err)

@@ -76,8 +76,8 @@ router.post('/order_accepted',(req,res)=>{
         else if(err)
             console.log("26 socket_fucn"+err);
     })
-    authentication.sendOTP_R(req.body.data.Recevier_Email,req.body.recevier_unique,req.body.data.Recevier_Name,req.body.data.Giver_Name,req.body.data.Phone,req.body.data.Name,req.body.Giver_Phone,req.body.Delivery_Address,req.body.Receving_Address,req.body.Recevier_Phone);
-    authentication.sendOTP_S(req.body.data.Giver_Email,req.body.sender_unique,req.body.data.Giver_Name,req.body.data.Phone,req.body.data.Name,req.body.Giver_Phone,req.body.Delivery_Address,req.body.Receving_Address,req.body.Recevier_Name,req.body.Recevier_Phone);
+    authentication.sendOTP_R(req.body.data.Recevier_Email,req.body.recevier_unique,req.body.data.Recevier_Name,req.body.data.Giver_Name,req.body.data.Phone,req.body.data.Name,req.body.data.Giver_Phone,req.body.data.Delivery_Address,req.body.data.Receving_Address,req.body.data.Recevier_Phone);
+    authentication.sendOTP_S(req.body.data.Giver_Email,req.body.sender_unique,req.body.data.Giver_Name,req.body.data.Phone,req.body.data.Name,req.body.data.Giver_Phone,req.body.data.Delivery_Address,req.body.data.Receving_Address,req.body.data.Recevier_Name,req.body.data.Recevier_Phone);
 })
 
 
