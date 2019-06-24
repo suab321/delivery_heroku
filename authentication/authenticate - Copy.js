@@ -38,12 +38,12 @@ const transporter= nodemailer.createTransport({
 
 
 //services outside this authentication
-const sendOTP_S=(email,number,s_name,driver_phone,driver_name,s_phone,d_address,r_address,r_name,r_phone)=>{
+const sendOTP_S=(email,number,d_name,s_name)=>{
     const mailoption={
         from:"stowawaysuab123@gmail.com",
         to:email,
         subject:"Stowaway:Start your trip with this OTP",
-    html:`<p>Dear ${s_name},</p><p>Your request has been accepted! ${driver_name} will collect the package from pickup address ${d_address}. This is the one time password (OTP) you will share with the traveler ${driver_name},once they have arrived to pick up the package. Without this OTP the delivery cannot be started.</p><p>OTP-${number}<br>Sender Name:${s_name}<br>Sender Phone Number:${s_phone}<br><br>Traveler Name:${driver_name}<br>Traveler Phone Number:${driver_phone}<br><br><Recevier Name:${r_name}<br>Recevier Phone Number:${r_phone}<br><br>*Do not share the OTP with anyone</p><p>Thanks,Team Stowaway</p>`
+    html:`<p>Dear ${s_name},</p><p>${d_name} will collect the package from pickup address. This is the one time password (OTP) you will share with the shipper once they have arrived to pick up the package. Without this OTP the delivery can not be started.<h3>OTP- ${number}</h3> *Do not share the OTP with anyone<br>Thanks,<br>Team Stowaway</p>`
     }
     transporter.sendMail(mailoption,(err,res)=>{
         if(err)
@@ -52,12 +52,12 @@ const sendOTP_S=(email,number,s_name,driver_phone,driver_name,s_phone,d_address,
             console.log(res);
     })
 }
-const sendOTP_R=(email,number,r_name,s_name,driver_phone,driver_name,s_phone,d_address,r_address,r_phone)=>{
+const sendOTP_R=(email,number,r_name,s_name)=>{
     const mailoption={
         from:"stowawaysuab123@gmail.com",
         to:email,
         subject:"Stowaway:Receive your package with this OTP",
-    html:`<p>Dear ${r_name},</p><p>${s_name} is having a package delivered to your home. This is the one time password (OTP) you will share with the shipper once they have arrived with package. Without this OTP the package will not be delivered.<br>OTP-${number}<br>Sender Name:${s_name}<br><Sender Phone Number:${s_phone}<br><br>Traveler Name:${driver_name}<br>Traveler Phone Number:${driver_phone}<br><br>Recevier Name:${r_name}<br>Recevier Phone Number:${r_phone}<br><br> *Do not share the OTP with anyone</p><p>Thanks,Team Stowaway</p>`
+    html:`<p>Dear ${r_name},</p><p>${s_name} is having a package delivered to your home. This is the one time password (OTP) you will share with the shipper once they have arrived with package. Without this OTP the package will not be delivered.<h3>OTP- ${number}</h3> *Do not share the OTP with anyone<br>Thanks,<br>Team Stowaway</p>`
     }
     transporter.sendMail(mailoption,(err,res)=>{
         if(err)
@@ -75,7 +75,7 @@ const verfiy=(email,token,Name)=>{
         to:email,
         subject:"Activate your Stowaway Account by verifying this link",
         text:"Click the below link for verification",
-        html:'<h3> Hi '+Name+', </h3><p>Thank you and welcome to Stowaway. To activate your account please click on the link below.</p><p><a href="https://floating-brushlands-52313.herokuapp.com/authentication/verification/'+token+'">'+token+'</a></p><p>If you are having trouble clicking the link please copy and paste the URL above in your web browser</p><p>Thanks,<br>Team Stowaway</p>'
+        html:'<h3> Hi '+Name+', </h3><p>Thank you and welcome to Stowaway. To activate your account please click on the link below.</p><p><a href="https://floating-brushlands-52313.herokuapp.com/authentication/verification/'+token+'">'+token+'</a></p><p>If you are having trouble clicking the link please copy and paste the URL above in your web browser.</p><p>Thanks,<br>Team Stowaway</p>'
     }
 
     transporter.sendMail(mailoption,(err,res)=>{
@@ -285,15 +285,11 @@ router.get('/resetpass/:email',(req,res)=>{
 
 //link for new password req coming here from frontend ejs
 router.post('/ressetingdone/:token',(req,res)=>{
-    if(req.body.password === req.body.cpassword){
-        jwt.verify(req.params.token,"suab",(err,authdata)=>{
-            perma.findOneAndUpdate({Email:authdata.user},{Password:req.body.password},{new:true}).then(user=>{
-                res.render('notify');
-            }).catch(err=>{res.render('forgetpassword',{email:req.params.token,err:"Some error occured try again"})})
-        })
-    }
-    else
-        res.render('forgotpassword.ejs',{email:req.params.token,err:"Passwords dont match"});
+    jwt.verify(req.params.token,"suab",(err,authdata)=>{
+        perma.findOneAndUpdate({Email:authdata.user},{Password:req.body.password},{new:true}).then(user=>{
+            res.render('notify');
+        }).catch(err=>{res.send(req.params.email)})
+    })
 })
 
 //new password frontend after clicking on link on gmail
@@ -302,13 +298,13 @@ router.get('/reseting/:token',(req,res)=>{
 })
 
 //loggingOut from mongo session
-router.get('/logout',(req,res)=>{
-    if(req.session.user && req.cookies.user_sid){
-        res.clearCookie('user_sid').json({res:"1"});
-    }
-    else
-        res.status(401).json({err:"0"})
-})
+// router.get('/logout',(req,res)=>{
+    // if(req.session.user && req.cookies.user_sid){
+        // res.clearCookie('user_sid').json({res:"1"});
+    // }
+    // else
+        // res.status(401).json({err:"0"})
+// })
 
 
 //getting_users data based on token recevied in request
@@ -410,6 +406,16 @@ router.post('/get_user',(req,res)=>{
     })
 })
 //route ended///
+
+//Logout
+router.get('/logout',get_token,(req,res)=>{
+	const userId=token.decodeToken(req.token).user;
+    perma.findByIdAndUpdate({_id:userId},{device_id:''},{new:true}).then(user=>{
+		res.status(200).res({response:"1"});
+	}).catch(err=>{
+		res.status(400).json({response:"2"});
+	})
+})
 
 
 module.exports={
