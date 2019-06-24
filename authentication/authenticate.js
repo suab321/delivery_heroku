@@ -294,7 +294,7 @@ router.post('/ressetingdone/:token',(req,res)=>{
         })
     }
     else
-        res.render('forgotpassword.ejs',{email:req.params.token,err:"Passwords dont match"});
+        res.render('forgetpassword',{email:req.params.token,err:"Passwords dont match"});
 })
 
 //new password frontend after clicking on link on gmail
