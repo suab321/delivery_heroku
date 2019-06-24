@@ -39,6 +39,7 @@ const transporter= nodemailer.createTransport({
 
 //services outside this authentication
 const sendOTP_S=(email,number,s_name,driver_phone,driver_name,s_phone,d_address,r_address,r_name,r_phone)=>{
+    console.log("Email sending to sender when order is accepted "+email,number,s_name,driver_phone,driver_name,s_phone,d_address,r_address,r_name,r_phone)
     const mailoption={
         from:"stowawaysuab123@gmail.com",
         to:email,
