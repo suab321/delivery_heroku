@@ -44,7 +44,7 @@ const sendOTP_S=(email,number,s_name,driver_phone,driver_name,s_phone,d_address,
         from:"stowawaysuab123@gmail.com",
         to:email,
         subject:"Stowaway:Start your trip with this OTP",
-    html:`<p>Dear ${s_name},</p><p>Your request has been accepted,<br>${driver_name} will collect the package from pickup address ${d_address}. This is the one time password (OTP) you will share with the traveler ${driver_name},once they have arrived to pick up the package. Without this OTP the delivery cannot be started.</p><p><b>OTP-${number}<b><br><br>Sender Name:${s_name}<br>Sender Phone Number:${s_phone}<br><br>Traveler Name:${driver_name}<br>Traveler Phone Number:${driver_phone}<br><br>Recevier Name:${r_name}<br>Recevier Phone Number:${r_phone}<br><br>*Do not share the OTP with anyone</p><p>Thanks,<br>Team Stowaway</p>`
+    html:`<p>Dear ${s_name},</p><p>Your request has been accepted,<br>${driver_name} will collect the package from pickup address ${d_address}. This is the one time password (OTP) you will share with the traveler ${driver_name},once they have arrived to pick up the package. Without this OTP the delivery cannot be started.</p><p><b>OTP-${number}<b><br><br>Sender Name: ${s_name}<br>Sender Phone Number: ${s_phone}<br><br>Traveler Name: ${driver_name}<br>Traveler Phone Number: ${driver_phone}<br><br>Recevier Name: ${r_name}<br>Recevier Phone Number: ${r_phone}<br><br>*Do not share the OTP with anyone</p><p>Thanks,<br>Team Stowaway</p>`
     }
     transporter.sendMail(mailoption,(err,res)=>{
         if(err)
@@ -58,7 +58,7 @@ const sendOTP_R=(email,number,r_name,s_name,driver_phone,driver_name,s_phone,d_a
         from:"stowawaysuab123@gmail.com",
         to:email,
         subject:"Stowaway:Receive your package with this OTP",
-    html:`<p>Dear ${r_name},</p><p>${s_name} is having a package delivered to your home. This is the one time password (OTP) you will share with the shipper once they have arrived with package. Without this OTP the package will not be delivered.</p><br><p><b>OTP-${number}<b><br><br>Sender Name:${s_name}<br><Sender Phone Number:${s_phone}<br><br>Traveler Name:${driver_name}<br>Traveler Phone Number:${driver_phone}<br><br>Recevier Name:${r_name}<br>Recevier Phone Number:${r_phone}<br><br> *Do not share the OTP with anyone</p><p>Thanks,<br>Team Stowaway</p>`
+    html:`<p>Dear ${r_name},</p><p>${s_name} is having a package delivered to your home. This is the one time password (OTP) you will share with the shipper once they have arrived with package. Without this OTP the package will not be delivered.</p><br><p><b>OTP-${number}<b><br><br>Sender Name: ${s_name}<br>Sender Phone Number: ${s_phone}<br><br>Traveler Name: ${driver_name}<br>Traveler Phone Number: ${driver_phone}<br><br>Recevier Name: ${r_name}<br>Recevier Phone Number: ${r_phone}<br><br> *Do not share the OTP with anyone</p><p>Thanks,<br>Team Stowaway</p>`
     }
     transporter.sendMail(mailoption,(err,res)=>{
         if(err)
